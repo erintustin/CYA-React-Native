@@ -1,8 +1,10 @@
 import RenderResource from '../features/resources/RenderResource';
 
-const ResourceInfoScreen = (props) => {
+const ResourceInfoScreen = ({ route }) => {
+    const { resource } = route.params;
+
     return (
-    <RenderResource resource={props.resource}/>   
+    <RenderResource resource={resource}/>   
     );
 };
 

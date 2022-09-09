@@ -1,26 +1,48 @@
-import { useState } from "react";
-import { View } from 'react-native';
-import { RESOURCES } from '../shared/RESOURCES';
+import { Platform, View } from 'react-native';
+import Constants from 'expo-constants';
+import { createStackNavigator } from '@react-navigation/stack';
+
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
 
+const ToolkitNavigator = () => {
+    const Stack = createStackNavigator();
+    return(
+        <Stack.Navigator
+            initialRouteName='Directory'
+            screenOptions={{
+                headerStyle: {
+                    backgroundColor: '#1ab4d2'
+                },
+                    headerTintColor: '#fff'
+            }}
+        >
+            <Stack.Screen 
+                name='Directory'
+                component={DirectoryScreen}
+                options={{ title: 'Resource Directory' }}
+            />
+            <Stack.Screen 
+                name='ResourceInfo'
+                component={ResourceInfoScreen}
+                options={({route}) => ({
+                    title: route.params.resource.name
+                })}
+            />
+        </Stack.Navigator>
+    );
+
+};
+
 const Main = () => {
-    const [resources, setResources] = useState(RESOURCES);
-    const [selectedResourceId, setSelectedResourceId] = useState();
 
     return (
-        <View style={{ flex: 1 }}>
-            <DirectoryScreen 
-                resources={resources}
-                onPress={(resourceId) => setSelectedResourceId(resourceId)}
-            />
-            <ResourceInfoScreen
-                    resource={
-                        resources.filter(
-                            (resource) => resource.id === selectedResourceId
-                        )[0]
-                    }
-                />
+        <View style={{ 
+                flex: 1, 
+                paddingTop:
+                    Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
+                }}>
+           <ToolkitNavigator />
         </View>
     );
 };

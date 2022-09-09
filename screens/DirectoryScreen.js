@@ -1,11 +1,15 @@
 import { FlatList } from 'react-native';
 import {Avatar, ListItem } from 'react-native-elements';
+import { useState } from 'react';
+import { RESOURCES } from '../shared/RESOURCES';
 
-const DirectoryScreen = (props) => {
+const DirectoryScreen = ({ navigation }) => {
+    const [resources, setResources] = useState(RESOURCES);
+
     const renderDirectoryItem = ({item: resource}) => {
         return(
             <ListItem 
-                onPress={() => props.onPress(resource.id)}
+                onPress={() => navigation.navigate('ResourceInfo', {resource})}
                 >
                 <Avatar 
                     source={resource.img}
@@ -20,7 +24,7 @@ const DirectoryScreen = (props) => {
     };
     return(
         <FlatList
-            data={props.resources}
+            data={resources}
             renderItem={renderDirectoryItem}
             keyExtractor={(item) => item.id.toString()}
 
