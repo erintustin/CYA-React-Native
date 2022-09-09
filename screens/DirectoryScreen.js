@@ -17,7 +17,8 @@ const DirectoryScreen = ({ navigation }) => {
                 />
                 <ListItem.Content>
                     <ListItem.Title>{resource.name}</ListItem.Title>
-                    <ListItem.Subtitle>{resource.author}</ListItem.Subtitle>
+                    <ListItem.Subtitle>By: {resource.author}</ListItem.Subtitle>
+                    <ListItem.Subtitle>Source: {resource.source}</ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
         );

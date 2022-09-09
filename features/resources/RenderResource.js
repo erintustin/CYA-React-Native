@@ -5,18 +5,20 @@ const RenderResource = ({ resource }) => {
     if (resource) {
         return (
             <Card containerStyle={{ padding: 0 }}>
-                <Card.Image source={resource.img}>
-                    <View style={{ justifyContent: 'center', flex: 1 }}>
+               
                         <Text style={{
-                            color: 'white',
+                            color: 'black',
                             textAlign: 'center',
-                            fontSize: 20 }}
+                            fontSize: 25 }}
                         >
                             {resource.name}
                         </Text>
-                    </View>
+                   
+                <Card.Image source={resource.img}>
+                
                 </Card.Image>
-                <Text style={{ margin: 20 }}>{resource.author}</Text>
+                <Text style={{ margin: 20 }}>By: {resource.author}</Text>
+                <Text style={{ margin: 20 }}>Source: {resource.source}</Text>
             </Card>
         );
     }
