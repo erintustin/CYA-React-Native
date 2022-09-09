@@ -16,16 +16,16 @@ const DirectoryScreen = (props) => {
                     <ListItem.Subtitle>{resource.author}</ListItem.Subtitle>
                 </ListItem.Content>
             </ListItem>
-        )
-    }
+        );
+    };
     return(
         <FlatList
-            data={props.resource}
+            data={props.resources}
             renderItem={renderDirectoryItem}
-            keyExtractor={(item) => item.id.toString()}>
+            keyExtractor={(item) => item.id.toString()}
 
-        </FlatList>
-    )
+        />
+    );
 
 };
 

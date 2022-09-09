@@ -4,10 +4,8 @@ import { Card } from 'react-native-elements';
 const RenderResource = ({ resource }) => {
     if (resource) {
         return (
-            <Card 
-                containerStyle={{ padding: 0 }}
-            >
-                <Card.Image source={resource.image}>
+            <Card containerStyle={{ padding: 0 }}>
+                <Card.Image source={resource.img}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text style={{
                             color: 'white',
@@ -20,10 +18,10 @@ const RenderResource = ({ resource }) => {
                 </Card.Image>
                 <Text style={{ margin: 20 }}>{resource.author}</Text>
             </Card>
-        )
+        );
     }
-        return 
-            <View />
+        return (
+        <View />);
         
 };
 
