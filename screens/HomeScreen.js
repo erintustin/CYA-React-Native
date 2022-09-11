@@ -123,8 +123,7 @@ const Feedback = () => {
 
 const HomeScreen = () => {
     const [resources, setResources] = useState(RESOURCES);
-    const featResource = resources.find((item) => item.featured);
-
+    
     return(
        <ScrollView style={{ backgroundColor: '#fff'}}>
         <ImageBackground 
