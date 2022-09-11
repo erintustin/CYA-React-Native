@@ -9,6 +9,10 @@ import { createDrawerNavigator,
 import HomeScreen from './HomeScreen';
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { fetchResources } from '../features/resources/resourcesSlice';
+import { fetchNotes } from '../features/notes/notesSlice';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,6 +25,13 @@ const screenOptions = {
 
 const HomeNavigator = () => {
     const Stack = createStackNavigator();
+
+const dispatch = useDispatch();
+
+useEffect(() => {
+    dispatch(fetchResources());
+    dispatch(fetchNotes());
+}, [dispatch]);
     
     return(
         <Stack.Navigator

@@ -1,12 +1,14 @@
 import RenderResource from '../features/resources/RenderResource';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
-import { NOTES }from '../shared/NOTES';
+import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
+
 
 const ResourceInfoScreen = ({ route }) => {
     const { resource } = route.params;
-    const [notes, setNotes ] = useState(NOTES);
-    const [addToToolkit, setAddToToolkit] = useState(false);
+    const notes = useSelector((state) => state.notes);
+    const myToolkitResources = useSelector((state) => state.myToolkitResources);
+    const dispatch = useDispatch();
 
     const renderNoteItem = ({ item}) => {
         return(
@@ -18,7 +20,7 @@ const ResourceInfoScreen = ({ route }) => {
 
     return (
         <FlatList
-            data={notes.filter(
+            data={notes.notesArray.filter(
                 (note) => note.resourceId === resource.id
             )}
             renderItem={renderNoteItem}
@@ -28,8 +30,8 @@ const ResourceInfoScreen = ({ route }) => {
             <>
                 <RenderResource 
                     resource={resource} 
-                    inToolkit={resource.inToolkit}
-                    addToToolkit={() => setAddToToolkit(true)}
+                    inToolkit={myToolkitResources.includes(resource.id)}
+                    addToToolkit={() => dispatch(toggleAddToToolkit(resource.id))}
                     />
                 <Text style={styles.notesTitle}>Notes</Text>
             </>

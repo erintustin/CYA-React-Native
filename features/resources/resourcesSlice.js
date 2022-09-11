@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { baseUrl } from '../../shared/baseUrl';
+import { mapImageURL } from '../../utils/mapImageURL';
 
 export const fetchResources = createAsyncThunk(
     'resources/fetchResources',
@@ -20,7 +21,7 @@ const resourcesSlice = createSlice({
         [fetchResources.fulfilled]: (state, action) => {
             state.isLoading = false;
             state.errMess = null;
-            state.resourcesArray = action.payload;
+            state.resourcesArray = mapImageURL(action.payload);
         },
         [fetchResources.rejected]: (state, action) => {
             state.isLoading = false;

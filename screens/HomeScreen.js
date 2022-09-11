@@ -1,7 +1,7 @@
 import { Text, View, ScrollView, ImageBackground, Image, StyleSheet } from 'react-native';
 import { ListItem, Avatar, Card } from 'react-native-elements';
-import { useState } from 'react';
-import { RESOURCES } from '../shared/RESOURCES';
+import { useSelector } from 'react-redux';
+import { baseUrl } from '../shared/baseUrl';
 import confetti from '../assets/img/confettiBg.png';
 import logo from '../assets/img/CYAlogo.png';
 import cake from '../assets/img/cake.png';
@@ -122,7 +122,7 @@ const Feedback = () => {
 };
 
 const HomeScreen = () => {
-    const [resources, setResources] = useState(RESOURCES);
+    const resources = useSelector((state) => state.resources);
     
     return(
        <ScrollView style={{ backgroundColor: '#fff'}}>

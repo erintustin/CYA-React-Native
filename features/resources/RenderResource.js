@@ -1,5 +1,6 @@
 import { Text, View, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
+import { baseUrl } from '../../shared/baseUrl';
 
 const RenderResource = (props) => {
     const { resource } = props;
@@ -15,15 +16,15 @@ const RenderResource = (props) => {
                             {resource.name}
                         </Text>
                    
-                <Card.Image source={resource.img}>
+                <Card.Image source={{uri: baseUrl + resource.img}}>
                 
                 </Card.Image>
                 <Text style={{ margin: 20 }}>By: {resource.author}</Text>
                 <Text style={{ margin: 20 }}>Source: {resource.source}</Text>
                 <Icon 
-                    name='plus'
+                    name={props.inToolkit ? 'minus' : 'plus'}
                     type='font-awesome'
-                    color={props.inToolkit ? 'lightgray' : '#1ab4d2'}
+                    color='#1ab4d2'
                     aria-label='add resource'
                     raised
                     reverse
