@@ -44,7 +44,7 @@ export const RESOURCES = [
         source: 'Neuroclastic',
         url: 'https://neuroclastic.com/its-a-spectrum-doesnt-mean-what-you-think/',
         img: img001,
-        featured: true,
+        inToolkit: true,
         type: 'Written',
         tagged: ''
     },
@@ -56,7 +56,7 @@ export const RESOURCES = [
         source: 'franklludwig.com',
         url: 'https://franklludwig.com/autismletter.html',
         img: img002,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
     },
@@ -68,7 +68,7 @@ export const RESOURCES = [
         source: 'Autism Spectrum News',
         url: 'https://www.autismspectrumnews.org/call-me-autistic-a-soft-correction-for-those-still-using-person-first-language/',
         img: img003,
-        featured: true,
+        inToolkit: true,
         type: 'Written',
         tagged: ''
 
@@ -81,7 +81,7 @@ export const RESOURCES = [
         source: "Thinking Person's Guide to Autism",
         url: 'https://thinkingautismguide.com/2022/06/we-should-tell-children-they-are-autistic-as-soon-as-possible.html',
         img: img004,
-        featured: true,
+        inToolkit: true,
         type: 'Written',
         tagged: ''
 
@@ -94,7 +94,7 @@ export const RESOURCES = [
         source: "Spectroomz",
         url: 'https://www.spectroomz.com/blog/how-to-tell-your-child-about-their-autism-diagnosis',
         img: img005,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -107,7 +107,7 @@ export const RESOURCES = [
         source: "In the Loop About Neurodiversity",
         url: 'https://intheloopaboutneurodiversity.wordpress.com/2019/03/20/the-ableist-history-of-the-puzzle-piece-symbol-for-autism/',
         img: img006,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -120,7 +120,7 @@ export const RESOURCES = [
         source: "pandasonline.org",
         url: 'https://www.youtube.com/watch?v=_490q6LaHIY',
         img: img007,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -133,7 +133,7 @@ export const RESOURCES = [
         source: "The Autistic Advocate",
         url: 'https://www.youtube.com/watch?v=qpXwYD9bGyU',
         img: img033,
-        featured: true,
+        inToolkit: true,
         type: 'Video',
         tagged: ''
 
@@ -146,7 +146,7 @@ export const RESOURCES = [
         source: "autisticality.co.uk/",
         url: 'https://m.facebook.com/111732458177011/posts/pfbid035JBo9gXQZ3ogTNzdZVqx8KV25YpAd7iXBvn7yL5vCsrzBx7sdsztCifGmkLq3BSEl/?d=n',
         img: img008,
-        featured: false,
+        inToolkit: false,
         type: 'Graphic',
         tagged: ''
 
@@ -159,7 +159,7 @@ export const RESOURCES = [
         source: "TEDxMacquarieUniversity",
         url: 'https://www.youtube.com/watch?v=A1AUdaH-EPM',
         img: img009,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -172,7 +172,7 @@ export const RESOURCES = [
         source: "Aucademy",
         url: 'https://aucademy.co.uk/2022/01/20/six-common-reactions-during-autistic-discovery/',
         img: img010,
-        featured: true,
+        inToolkit: true,
         type: 'Written',
         tagged: ''
 
@@ -185,7 +185,7 @@ export const RESOURCES = [
         source: 'Spectrum News',
         url: 'https://www.spectrumnews.org/features/deep-dive/hidden-danger-suicide-autism/',
         img: img011,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -198,7 +198,7 @@ export const RESOURCES = [
         source: 'Autistic Village',
         url: 'https://autistic-village.com/2021/08/12/learning-to-play-no-playing-to-learn/?fbclid=IwAR09YuGwxo3tCujHF4xdshtaYkZAuXi7rhXepIKUI2X54SahDpUpn1KX1EE',
         img: img012,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -211,7 +211,7 @@ export const RESOURCES = [
         source: 'Just Stimming',
         url: 'https://juststimming.wordpress.com/2021/12/20/about-functional-play/?fs=e&s=cl&fbclid=IwAR2TQn0j9CpcI0wrba3VW_1gh1bZJqXWM1y8xt_vr0fKYuSsQS5SnB1YQIc',
         img: img013,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -224,7 +224,7 @@ export const RESOURCES = [
         source: 'The Deaf.Autistic OT',
         url: 'https://www.facebook.com/watch/?v=332810574248600&ref=sharing',
         img: img014,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -237,7 +237,7 @@ export const RESOURCES = [
         source: 'Autistic & Unapologetic',
         url: 'https://autisticandunapologetic.com/2020/07/26/monotropism-the-most-accurate-autism-theory-youve-probably-never-heard-of/',
         img: img015,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -250,7 +250,7 @@ export const RESOURCES = [
         source: 'The Art of Autism',
         url: 'https://the-art-of-autism.com/why-its-hard-to-switch-tasks-a-comic-strip-explanation/?fbclid=IwAR3vmcL4KMoiY8L8SLArlWRoFagMRmqgS_iyk63cTmDdEOFvi167Ooyvoaw',
         img: img016,
-        featured: false,
+        inToolkit: false,
         type: 'Graphic',
         tagged: ''
 
@@ -263,7 +263,7 @@ export const RESOURCES = [
         source: 'Psychology Today',
         url: 'https://www.psychologytoday.com/au/blog/insights-about-autism/202003/5-messages-my-younger-autistic-self?fbclid=IwAR214QfP5p2QKrYUY_F1Zr174otS4GX2SGy8Md1RtceAIV6sDuBOVlOY5oA',
         img: img017,
-        featured: true,
+        inToolkit: true,
         type: 'Written',
         tagged: ''
 
@@ -276,7 +276,7 @@ export const RESOURCES = [
         source: 'Apartment Therapy',
         url: 'https://www.apartmenttherapy.com/baby-pink-safe-space-36955978?fbclid=IwAR3mr94woj_7kH9_NbiFkOEID_RL7M4ax2bhrLwHhzuhlcyy84hCfMkwRTA',
         img: img018,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -289,7 +289,7 @@ export const RESOURCES = [
         source: "Thinking Person's Guide to Autism",
         url: 'https://thinkingautismguide.com/2022/04/understanding-how-routines-can-help-autistic-people.html',
         img: img019,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -302,7 +302,7 @@ export const RESOURCES = [
         source: "Autistic Science Person",
         url: 'https://autisticscienceperson.com/2021/01/09/neurotypicals-listen-to-our-words-not-our-tone/?fbclid=IwAR0py-18Tb654sg49Fg_akr9OIAXiLOeki8HtD_jwj908Xb4c1aV4w_Z0-A',
         img: img020,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -315,7 +315,7 @@ export const RESOURCES = [
         source: "Thinking Person's Guide to Autism",
         url: 'https://thinkingautismguide.com/2021/05/its-never-just-sandwich-meltdowns.html',
         img: img021,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -328,7 +328,7 @@ export const RESOURCES = [
         source: "The A List",
         url: 'https://www.facebook.com/watch/?v=891559684869883',
         img: img022,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -341,7 +341,7 @@ export const RESOURCES = [
         source: "Paige Layle Autism & Stuff",
         url: 'https://www.youtube.com/watch?v=hu031z6CXWo',
         img: img023,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -354,7 +354,7 @@ export const RESOURCES = [
         source: "Spectrum News",
         url: 'https://www.spectrumnews.org/features/deep-dive/costs-camouflaging-autism/',
         img: img024,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -367,7 +367,7 @@ export const RESOURCES = [
         source: "Purple Ella",
         url: 'https://www.youtube.com/watch?v=7MN6lmVq3E4',
         img: img025,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -380,7 +380,7 @@ export const RESOURCES = [
         source: "Neuroclastic",
         url: 'https://neuroclastic.com/humanizing-the-dsm-diagnosis-for-autism/',
         img: img026,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
 
@@ -393,7 +393,7 @@ export const RESOURCES = [
         source: "A Different Spectrum",
         url: 'https://www.instagram.com/reel/CbQpwu2Amtu/?utm_source=ig_web_copy_link',
         img: img027,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
 
@@ -406,7 +406,7 @@ export const RESOURCES = [
         source: "Thinking Person's Guide to Autism",
         url: 'https://thinkingautismguide.com/2019/01/can-my-child-ever-learn-to-speak-communication.html',
         img: img030,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
     },
@@ -418,7 +418,7 @@ export const RESOURCES = [
         source: "Just Keep Stimming",
         url: 'https://justkeepstimming.com/2019/12/27/all-about-aac/',
         img: img031,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
     },
@@ -430,7 +430,7 @@ export const RESOURCES = [
         source: "communicationfirst.org",
         url: 'https://youtu.be/H7dca7U7GI8',
         img: img032,
-        featured: false,
+        inToolkit: false,
         type: 'Video',
         tagged: ''
     },
@@ -442,7 +442,7 @@ export const RESOURCES = [
         source: 'Spectrum News',
         url: 'https://www.spectrumnews.org/opinion/viewpoint/autistic-while-black-how-autism-amplifies-stereotypes/',
         img: img028,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
     },
@@ -454,7 +454,7 @@ export const RESOURCES = [
         source: 'Black Youth Project',
         url: 'http://blackyouthproject.com/for-black-women-and-girls-who-arent-autistic-enough/',
         img: img029,
-        featured: false,
+        inToolkit: false,
         type: 'Written',
         tagged: ''
     },
