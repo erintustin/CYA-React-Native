@@ -9,6 +9,7 @@ import { createDrawerNavigator,
 import HomeScreen from './HomeScreen';
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
+import myToolkitScreen from './MyToolkitScreen';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchResources } from '../features/resources/resourcesSlice';
@@ -25,14 +26,6 @@ const screenOptions = {
 
 const HomeNavigator = () => {
     const Stack = createStackNavigator();
-
-const dispatch = useDispatch();
-
-useEffect(() => {
-    dispatch(fetchResources());
-    dispatch(fetchNotes());
-}, [dispatch]);
-    
     return(
         <Stack.Navigator
             screenOptions={screenOptions}>
@@ -77,7 +70,6 @@ const DirectoryNavigator = () => {
                     )
                 })}
             />
-            
             <Stack.Screen 
                 name='ResourceInfo'
                 component={ResourceInfoScreen}
@@ -87,7 +79,29 @@ const DirectoryNavigator = () => {
             />
         </Stack.Navigator>
     );
+};
 
+const MyToolkitNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator screenOptions={screenOptions}>
+            <Stack.Screen
+                name='MyToolkit'
+                component={myToolkitScreen}
+                options={({ navigation }) => ({
+                    title: 'My Toolkit',
+                    headerLeft: () => (
+                        <Icon
+                            name='user'
+                            type='font-awesome'
+                            iconStyle={styles.stackIcon}
+                            onPress={() => navigation.toggleDrawer()}
+                        />
+                    )
+                })}
+            />
+        </Stack.Navigator> 
+    );
 };
 
 const CustomDrawerContent = (props) => (
@@ -109,6 +123,12 @@ const CustomDrawerContent = (props) => (
 );
 
 const Main = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(fetchResources());
+        dispatch(fetchNotes());
+    }, [dispatch]);
 
     return (
         <View style={{ 
@@ -117,21 +137,58 @@ const Main = () => {
                     Platform.OS === 'ios' ? 0 : Constants.statusBarHeight
                 }}>
            <Drawer.Navigator
-            initialRouteName='Home'
-            drawerStyle={{ backgroundColor: 'rgb(243, 239, 239)'}}
-            drawerContent={CustomDrawerContent}
+                initialRouteName='Home'
+                drawerStyle={{ backgroundColor: 'rgb(243, 239, 239)'}}
+                drawerContent={CustomDrawerContent}
             >
                 <Drawer.Screen 
                     name='Home'
                     component={HomeNavigator}
-                    options={{ title: 'Home' }}
+                    options={{ 
+                        title: 'Home',
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='home'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
                 />
                 <Drawer.Screen 
                     name='Directory'
                     component={DirectoryNavigator}
-                    options={{ title: 'Resource Directory' }}
+                    options={{ 
+                        title: 'Resource Directory',
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='list'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color} 
+                            />
+                        )
+                    }}
                 />
-
+                <Drawer.Screen
+                    name='MyToolkit'
+                    component={MyToolkitNavigator}
+                    options={{
+                        title: 'My Toolkit',
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='user'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
            </Drawer.Navigator>
         </View>
     );

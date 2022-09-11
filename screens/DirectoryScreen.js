@@ -2,7 +2,7 @@ import { FlatList, Text, View } from 'react-native';
 import { ListItem, Avatar } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
-import Loading from '../components/LoadingComponent';
+import Loading  from '../components/LoadingComponent';
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
