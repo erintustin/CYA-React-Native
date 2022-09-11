@@ -1,8 +1,11 @@
-import { Platform, View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text, Image } from 'react-native';
+import logo from '../assets/img/CYAlogo.png'
 import { Icon } from 'react-native-elements';
 import Constants from 'expo-constants';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator, 
+        DrawerContentScrollView, 
+        DrawerItemList } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
@@ -76,6 +79,24 @@ const DirectoryNavigator = () => {
 
 };
 
+const CustomDrawerContent = (props) => (
+    <DrawerContentScrollView {...props}>
+        <View style={styles.drawerHeader}>
+            <View style={{ flex: 1 }}>
+                <Image source={logo} style={styles.drawerImage} />
+            </View>
+            <View style={{ flex: 2 }}>
+                <Text style={styles.drawerHeaderText}>Congrats, You're Autistic!</Text>
+            </View>
+        </View>
+        <DrawerItemList 
+            {...props} 
+            labelStyle={{ fontWeight: 'bold' }}
+            activeBackgroundColor='#cfe6ea'
+            activeTintColor='black' />
+    </DrawerContentScrollView>
+);
+
 const Main = () => {
 
     return (
@@ -86,7 +107,9 @@ const Main = () => {
                 }}>
            <Drawer.Navigator
             initialRouteName='Home'
-            drawerStyle={{ backgroundColor: 'rgb(243, 239, 239)'}}>
+            drawerStyle={{ backgroundColor: 'rgb(243, 239, 239)'}}
+            drawerContent={CustomDrawerContent}
+            >
                 <Drawer.Screen 
                     name='Home'
                     component={HomeNavigator}
@@ -108,6 +131,27 @@ const styles = StyleSheet.create({
         marginLeft: 10,
         color: '#fff',
         fontSize: 24
+    },
+
+    drawerHeader: {
+        backgroundColor: '#1ab4d2',
+        height: 140,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row'
+    },
+
+    drawerHeaderText: {
+        color: '#000',
+        fontSize: 26,
+        fontFamily: 'GochiHand_400Regular',
+        margin: 5
+    },
+    drawerImage: {
+        margin: 10,
+        height: 60,
+        width: 60
     }
 });
 
