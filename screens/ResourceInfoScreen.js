@@ -27,7 +27,7 @@ const ResourceInfoScreen = ({ route }) => {
     };
     
     const resetForm = () => {
-        let setText=('');
+        setText('');
     };
 
     const renderNoteItem = ({ item}) => {
