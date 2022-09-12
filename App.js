@@ -1,11 +1,11 @@
 import { Provider } from 'react-redux';
-import { store } from './redux/store';
 import { NavigationContainer } from '@react-navigation/native';
 import Main from './screens/MainComponent.js';
 import AppLoading from 'expo-app-loading';
 import { useFonts, GochiHand_400Regular, Catamaran_400Regular } from '@expo-google-fonts/dev';
-
-
+import { persistor, store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import Loading from './components/LoadingComponent';
 
 
 
@@ -22,11 +22,13 @@ export default function App() {
   } else {
     return (
     
-    <NavigationContainer>
-        <Provider store={store}>
-          <Main />
+      <Provider store={store}>
+            <PersistGate loading={<Loading />} persistor={persistor}>
+                <NavigationContainer>
+                    <Main />
+                </NavigationContainer>
+            </PersistGate>
         </Provider>
-      </NavigationContainer>
     
   );
 };

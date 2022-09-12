@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import Loading from '../components/LoadingComponent';
+import * as Animatable from 'react-native-animatable'
 
 const myToolkitScreen = ({ navigation }) => {
     const { resourcesArray, isLoading, errMess } = useSelector(
@@ -83,13 +84,15 @@ const myToolkitScreen = ({ navigation }) => {
     }
 
     return(
-        <FlatList  
-            data={resourcesArray.filter((resource) =>
-                myToolkitResources.includes(resource.id)
-            )}
-            renderItem={renderMyToolkitResource}
-            keyExtractor={(item) => item.id.toString()}
-        />
+        <Animatable.View animation='fadeInRightBig' duration={2000}>
+            <FlatList  
+                data={resourcesArray.filter((resource) =>
+                    myToolkitResources.includes(resource.id)
+                )}
+                renderItem={renderMyToolkitResource}
+                keyExtractor={(item) => item.id.toString()}
+            />
+        </Animatable.View>
     );
 };
 
