@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, ImageBackground, Image, StyleSheet , Button} from 'react-native';
+import { Text, View, Animated, ImageBackground, Image, StyleSheet } from 'react-native';
 import { ListItem, Avatar, Card } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -10,6 +10,7 @@ import feedback from '../assets/img/feedbacklogo.png'
 import headericon1 from '../assets/img/headerIcon1.png';
 import headericon2 from '../assets/img/headerIcon2.png';
 import headericon3 from '../assets/img/headerIcon3.png';
+import { useEffect, useRef } from 'react';
 
 const CoreValues = () => {
     return(
@@ -79,11 +80,7 @@ const BrowseResources = () => {
 
 const MyToolkit = () => {
     return(
-        <Card onPress={() =>
-            navigation.navigate('Home', {
-                screen: 'MyToolkit',
-                params: {resources}
-                })}
+        <Card 
             containerStyle={{ padding: 0 }}
             style={styles.card}
             >
@@ -127,10 +124,21 @@ const Feedback = () => {
 };
 
 const HomeScreen = ({ navigation }) => {
-    const resources = useSelector((state) => state.resources);
-    
+    const scaleValue = useRef(new Animated.Value(0)).current;
+    const scaleAnimation = Animated.timing(scaleValue, {
+        toValue: 1,
+        duration: 1500,
+        useNativeDriver: true
+    });
+    useEffect(() => {
+        scaleAnimation.start();
+    }, []);
+
     return(
-       <ScrollView style={{ backgroundColor: '#fff'}}>
+       <Animated.ScrollView 
+            style={{ 
+                transform: [{ scale: scaleValue }], 
+                backgroundColor: '#fff'}}>
         <ImageBackground 
             source={confetti}
             style={{width: '100%', height: '100%'}}>
@@ -147,7 +155,7 @@ const HomeScreen = ({ navigation }) => {
         <MyToolkit />
         <Feedback />
         </ImageBackground>
-        </ScrollView>
+        </Animated.ScrollView>
     );
 };
 
