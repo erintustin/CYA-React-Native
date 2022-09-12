@@ -63,17 +63,19 @@ const ResourceInfoScreen = ({ route }) => {
                 animationType='slide'
                 transparent={false}
                 visible={showModal}
-                onRequestClose={() => setShowModal(!showModal)}
                 style={{margin: 10}}
+                onRequestClose={() => setShowModal(!showModal)}
             >
                 <View style={styles.modal}>
-                    <Text style={styles.modalHeader}>Notes</Text>
+                    <Text style={styles.modalHeader}>Add Notes</Text>
                     <TextInput
                         multiline
-                        numberOfLines={20}
+                        numberOfLines={28}
                         width='95%'
                         style={{
                             margin: 10,
+                            marginTop: -9,
+                            backgroundColor: '#fff',
                             borderWidth: 1,
                             borderColor: 'gray',
                             padding: 10,
@@ -118,11 +120,12 @@ const styles = StyleSheet.create({
         backgroundColor: '#1ab4d2', 
         borderRadius: 10,
         fontSize: 30,
+        padding: 10,
         textAlign: 'center',
         fontFamily: 'GochiHand_400Regular',
         marginTop: 20,
         marginLeft: 10,
-        marginRight: 10,
+        marginRight: 7,
         marginBottom: 0
       },
 
