@@ -1,11 +1,12 @@
-import { View, FlatList, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Avatar, ListItem } from 'react-native-elements';
 import { baseUrl } from '../shared/baseUrl';
 import { useDispatch, useSelector } from 'react-redux';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
+import Loading from '../components/LoadingComponent';
 
-const myToolkitScreen = () => {
+const myToolkitScreen = ({ navigation }) => {
     const { resourcesArray, isLoading, errMess } = useSelector(
         (state) => state.resources
         );
@@ -18,7 +19,30 @@ const myToolkitScreen = () => {
                 <View style={styles.deleteView}>
                     <TouchableOpacity 
                         style={styles.deleteTouchable}
-                        onPress={() => dispatch(toggleAddToToolkit(resource.id))}
+                        onPress={() =>
+                            Alert.alert(
+                                'Delete from Toolkit?',
+                                'Are you sure you wish to delete this resource from your toolkit?',
+                                [
+                                    {
+                                        text: 'Cancel',
+                                        onPress: () =>
+                                            console.log(
+                                                resource.name + 'not deleted'
+                                            ),
+                                        style: 'cancel'
+                                    },
+                                    {
+                                        text: 'OK',
+                                        onPress:() => 
+                                            dispatch(
+                                                toggleAddToToolkit(resource.id)
+                                            )
+                                    }
+                                ],
+                                {cancelable: false}
+                            )
+                        }
                     >
                         <Text style={styles.deleteText}>Delete</Text>
                     </TouchableOpacity>
