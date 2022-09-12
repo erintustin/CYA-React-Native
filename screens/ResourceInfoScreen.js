@@ -1,8 +1,8 @@
 import RenderResource from '../features/resources/RenderResource';
 import { useSelector, useDispatch } from 'react-redux';
-import { FlatList, StyleSheet, Text, View, Modal, Button} from 'react-native';
+import { FlatList, StyleSheet, Text, View, Modal, Button, TouchableOpacity, Alert} from 'react-native';
 import { TextInput } from 'react-native';
-import { postNote } from '../features/notes/notesSlice';
+import { postNote, deleteNote } from '../features/notes/notesSlice';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import { useState } from 'react';
 
@@ -27,14 +27,53 @@ const ResourceInfoScreen = ({ route }) => {
     };
     
     const resetForm = () => {
-        setText('');
+        setText({text});
     };
 
     const renderNoteItem = ({ item}) => {
         return(
-            <View style={styles.noteItem}>
-                <Text style={{ fontSize: 14 }}>{item.text}</Text>
+            <>
+            <View style={styles.note}>
+                <Text style={styles.noteItem}>{item.text}</Text>
+                <TouchableOpacity
+                style={styles.noteButtons}
+                onPress={() => setShowModal(!showModal)}
+                     
+                    
+            >
+                <Text style={styles.editText}>EDIT</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+            style={styles.noteButtons}
+                onPress={() =>
+                    Alert.alert(
+                        'Delete from Toolkit?',
+                        'Are you sure you wish to delete this resource from your toolkit?',
+                        [
+                            {
+                                text: 'Cancel',
+                                onPress: () =>
+                                    console.log(
+                                        resource.name + 'not deleted'
+                                    ),
+                                style: 'cancel'
+                            },
+                            {
+                                text: 'OK',
+                                onPress:() => 
+                                    dispatch(
+                                        deleteNote()
+                                    )
+                            }
+                        ],
+                        {cancelable: false}
+                    )
+                }
+            >
+                <Text style={styles.deleteText}>DELETE</Text>
+            </TouchableOpacity>
             </View>
+           </> 
         );
     };
 
@@ -67,10 +106,10 @@ const ResourceInfoScreen = ({ route }) => {
                 onRequestClose={() => setShowModal(!showModal)}
             >
                 <View style={styles.modal}>
-                    <Text style={styles.modalHeader}>Add Notes</Text>
+                    <Text style={styles.modalHeader}>Edit Notes</Text>
                     <TextInput
                         multiline
-                        numberOfLines={28}
+                        numberOfLines={15}
                         width='95%'
                         style={{
                             margin: 10,
@@ -88,7 +127,6 @@ const ResourceInfoScreen = ({ route }) => {
                         <Button
                             onPress={() => {
                                 handleSubmit();
-                                resetForm();
                             }}
                             color='#1ab4d2'
                             title='Submit'
@@ -135,18 +173,39 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontFamily: 'GochiHand_400Regular',
         color: '#43484D',
-        padding: 15,
+        padding: 10,
         margin: 15,
         marginBottom: 0,
-        borderRadius: 10
+        borderRadius: 10,
+        borderWidth: 1
+    },
+    note: {
+        paddingVertical: 5,
+        paddingHorizontal: 20,
+        margin: 15,
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
     noteItem: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        backgroundColor: '#fff',
-        margin: 15,
-        marginTop: -9,
-        borderWidth: 1
+        width: '100%'},
+    noteButtons: {
+        width: '15%',
+        margin: 5,
+        alignItems: 'center'
+    },
+    deleteText: {
+        color: 'red',
+        fontWeight: '700',
+        textAlign: 'center',
+        fontSize: 16,
+        width: 75
+    },
+    editText: {
+        color: '#1ab4d2',
+        fontWeight: '700',
+        textAlign: 'center',
+        fontSize: 16,
+        width: 75
     }
 });
 
