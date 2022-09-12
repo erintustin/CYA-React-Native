@@ -64,6 +64,7 @@ const ResourceInfoScreen = ({ route }) => {
                 transparent={false}
                 visible={showModal}
                 onRequestClose={() => setShowModal(!showModal)}
+                style={{margin: 10}}
             >
                 <View style={styles.modal}>
                     <Text style={styles.modalHeader}>Notes</Text>
@@ -125,19 +126,24 @@ const styles = StyleSheet.create({
         marginBottom: 0
       },
 
-    commentsTitle: {
+    notesTitle: {
         textAlign: 'center',
-        backgroundColor: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
+        backgroundColor: '#1ab4d2',
+        fontSize: 24,
+        fontFamily: 'GochiHand_400Regular',
         color: '#43484D',
-        padding: 10,
-        paddingTop: 30
+        padding: 15,
+        margin: 15,
+        marginBottom: 0,
+        borderRadius: 10
     },
-    commentItem: {
+    noteItem: {
         paddingVertical: 10,
         paddingHorizontal: 20,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        margin: 15,
+        marginTop: -9,
+        borderWidth: 1
     }
 });
 
