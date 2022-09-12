@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, ImageBackground, Image, StyleSheet } from 'react-native';
+import { Text, View, ScrollView, ImageBackground, Image, StyleSheet , Button} from 'react-native';
 import { ListItem, Avatar, Card } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -79,9 +79,14 @@ const BrowseResources = () => {
 
 const MyToolkit = () => {
     return(
-        <Card
+        <Card onPress={() =>
+            navigation.navigate('Home', {
+                screen: 'MyToolkit',
+                params: {resources}
+                })}
             containerStyle={{ padding: 0 }}
-            style={styles.card}>
+            style={styles.card}
+            >
                 
                 <Card.Image
                     source={squishmallow}
@@ -121,7 +126,7 @@ const Feedback = () => {
     )
 };
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
     
     return(
