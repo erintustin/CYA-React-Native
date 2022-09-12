@@ -9,10 +9,27 @@ export const fetchNotes = createAsyncThunk(
     }
 );
 
+export const postNote = createAsyncThunk(
+    'notes/postNote',
+    async (payload, 
+          {dispatch, getState}
+          ) => {
+            setTimeout(() => {
+                const { notes } = getState();
+                payload.id = notes.notesArray.length;
+                dispatch(addNote(payload));
+            }, 2000);
+    }
+);
+
 const notesSlice = createSlice({
     name: 'notes',
     initialState: { isLoading: true, errMess: null, notesArray: [] },
-    reducers: {},
+    reducers: {
+        addNote: (state, action) => {
+            state.notesArray.push(action.payload);
+        }
+    },
     extraReducers: {
         [fetchNotes.pending]: (state) => {
             state.isLoading = true;
@@ -30,3 +47,4 @@ const notesSlice = createSlice({
 });
 
 export const notesReducer = notesSlice.reducer;
+export const { addNote } = notesSlice.actions;
