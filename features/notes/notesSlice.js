@@ -33,6 +33,12 @@ const notesSlice = createSlice({
             const noteId = payload.id;
             state.notesArray.splice(noteId, 1);
         },
+        editNote: (state, action) => {
+            const oldNoteId = state.id;
+            const newNote = action.payload;
+            state.notesArray.splice(oldNoteId, 1, newNote);
+                
+    }
     },
     extraReducers: {
         [fetchNotes.pending]: (state) => {
@@ -51,4 +57,4 @@ const notesSlice = createSlice({
 });
 
 export const notesReducer = notesSlice.reducer;
-export const { addNote, deleteNote } = notesSlice.actions;
+export const { addNote, deleteNote, editNote } = notesSlice.actions;

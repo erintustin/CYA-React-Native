@@ -2,7 +2,7 @@ import RenderResource from '../features/resources/RenderResource';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, StyleSheet, Text, View, Modal, Button, TouchableOpacity, Alert} from 'react-native';
 import { TextInput } from 'react-native';
-import { postNote, deleteNote } from '../features/notes/notesSlice';
+import { postNote, deleteNote, editNote } from '../features/notes/notesSlice';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import { useState } from 'react';
 
@@ -14,6 +14,7 @@ const ResourceInfoScreen = ({ route }) => {
     const notes = useSelector((state) => state.notes);
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
     const [showModal, setShowModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
     const [text, setText] = useState('');
     const dispatch = useDispatch();
 
@@ -25,6 +26,12 @@ const ResourceInfoScreen = ({ route }) => {
         dispatch(postNote(newNote));
         setShowModal(!showModal);
     };
+
+    const handleEdit = () => {
+        
+        dispatch(editNote());
+        setShowEditModal(!showEditModal);
+    }
     
     const resetForm = () => {
         setText({text});
@@ -35,26 +42,18 @@ const ResourceInfoScreen = ({ route }) => {
             <>
             <View style={styles.note}>
                 <Text style={styles.noteItem}>{item.text}</Text>
-                <TouchableOpacity
-                style={styles.noteButtons}
-                onPress={() => setShowModal(!showModal)}
-                     
-                    
-            >
-                <Text style={styles.editText}>EDIT</Text>
-            </TouchableOpacity>
             <TouchableOpacity
             style={styles.noteButtons}
                 onPress={() =>
                     Alert.alert(
                         'Delete from Toolkit?',
-                        'Are you sure you wish to delete this resource from your toolkit?',
+                        'Are you sure you wish to delete this note?',
                         [
                             {
                                 text: 'Cancel',
                                 onPress: () =>
                                     console.log(
-                                        resource.name + 'not deleted'
+                                        'note not deleted'
                                     ),
                                 style: 'cancel'
                             },
@@ -72,6 +71,7 @@ const ResourceInfoScreen = ({ route }) => {
             >
                 <Text style={styles.deleteText}>DELETE</Text>
             </TouchableOpacity>
+            
             </View>
            </> 
         );
@@ -95,6 +95,14 @@ const ResourceInfoScreen = ({ route }) => {
                         onShowModal={() => setShowModal(!showModal)}
                         />
                     <Text style={styles.notesTitle}>Notes</Text>
+                    <TouchableOpacity
+            style={styles.noteButtons}
+                onPress={() => setShowModal(!showModal)
+                    
+                }
+            >
+                <Text style={styles.addNoteText}>ADD NOTE</Text>
+            </TouchableOpacity>
                 </>
                 }
             />
@@ -106,7 +114,7 @@ const ResourceInfoScreen = ({ route }) => {
                 onRequestClose={() => setShowModal(!showModal)}
             >
                 <View style={styles.modal}>
-                    <Text style={styles.modalHeader}>Edit Notes</Text>
+                    <Text style={styles.modalHeader}>Add Notes</Text>
                     <TextInput
                         multiline
                         numberOfLines={15}
@@ -187,18 +195,33 @@ const styles = StyleSheet.create({
         flexWrap: 'wrap',
     },
     noteItem: {
-        width: '100%'},
+        width: '100%',
+        fontSize: 18
+    },
     noteButtons: {
-        width: '15%',
-        margin: 5,
-        alignItems: 'center'
+        width: '100%',
+        margin: 10,
+        alignItems: 'center',
     },
     deleteText: {
-        color: 'red',
+        color: 'white',
+        backgroundColor: '#f75832',
+        borderRadius: 10,
         fontWeight: '700',
         textAlign: 'center',
-        fontSize: 16,
-        width: 75
+        fontSize: 14,
+        width: 75,
+        padding: 5
+    },
+    addNoteText: {
+        color: 'white',
+        backgroundColor: 'gray',
+        borderRadius: 10,
+        fontWeight: '700',
+        textAlign: 'center',
+        fontSize: 14,
+        width: 90,
+        padding: 5
     },
     editText: {
         color: '#1ab4d2',
