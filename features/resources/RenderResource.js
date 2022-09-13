@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Text, View, StyleSheet, Share } from 'react-native';
+import { Text, View, StyleSheet, Share, Button } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { baseUrl } from '../../shared/baseUrl';
 import * as Animatable from 'react-native-animatable';
@@ -48,50 +48,45 @@ const RenderResource = (props) => {
                     </Card.Image>
                     <Text style={{ margin: 20 }}>By: {resource.author}</Text>
                     <Text style={{ margin: 20 }}>Source: {resource.source}</Text>
-                    <View style={styles.cardRow}>
-                    <Icon 
-                            name='eye'
-                            type='font-awesome'
+                
+                    <View style={styles.buttons}>
+                        <Button 
+                            title='View Resource' 
                             color='#1ab4d2'
-                            aria-label='add resource'
-                            raised
-                            reverse
                             onPress={() => Linking.openURL(resource.url)}
-                        /> 
-                        
-                        <Icon 
-                            name={props.inToolkit ? 'undo' : 'user-plus'}
-                            type='font-awesome'
+                        />  
+                    </View>
+                    <View style={styles.buttons}>
+                        <Button 
+                            style={styles.buttons}
+                            title={props.inToolkit ? 'Remove from Toolkit' : 'Add to Toolkit'}
                             color='#1ab4d2'
-                            aria-label='add resource'
-                            raised
-                            reverse
                             onPress={() => 
                                 dispatch(
                                     toggleAddToToolkit(resource.id))}
                         />
-                        <Icon
-                            name='pencil'
-                            type='font-awesome'
+                      </View>
+                    <View style={styles.buttons}>
+                        <Button
+                            style={styles.buttons}
+                            title='Add Note'
                             color='#1ab4d2'
-                            raised
-                            reverse
                             onPress={props.onShowModal}
                         />
-                        <Icon 
-                            name='share'
-                            type='font-awesome'
+                    </View>
+                    <View style={styles.buttons}>
+                        <Button 
+
+                            title='Share Resource'
                             color='#1ab4d2'
-                            aria-label='add resource'
-                            raised
-                            reverse
                             onPress={() => 
                                 ShareResource(
                                     resource.name,
                                     resource.url
                                 )}
-                        />
+                            />
                     </View>
+                  
                 </Card>
             </Animatable.View>
         );
@@ -107,12 +102,16 @@ const styles = StyleSheet.create({
         margin: 0,
         marginBottom: 20
     },
-    cardRow: {
+    buttonContainer: {
         alignItems: 'center',
         justifyContent: 'center',
-        flex: 1,
+        flex: 2,
+        flexWrap: 'wrap',
         flexDirection: 'row',
-        margin: 20
+        margin: 20,
+    },
+    buttons: {
+        margin: 5
     },
     cardText: {
         textShadowColor: 'rgba(0, 0, 0, 1)',

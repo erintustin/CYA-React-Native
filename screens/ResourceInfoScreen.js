@@ -41,39 +41,42 @@ const ResourceInfoScreen = ({ route }) => {
     const renderNoteItem = ({ item}) => {
         return(
             <>
-            <View style={styles.note}>
-                <Text style={styles.noteItem}>{item.text}</Text>
-            <TouchableOpacity
-                style={styles.noteButtons}
-                onPress={() =>
-                    Alert.alert(
-                        'Delete from Toolkit?',
-                        'Are you sure you wish to delete this note?',
-                        [
-                            {
-                                text: 'Cancel',
-                                onPress: () =>
-                                    console.log(
-                                        'note not deleted'
-                                    ),
-                                style: 'cancel'
-                            },
-                            {
-                                text: 'OK',
-                                onPress:() => 
-                                    dispatch(
-                                        deleteNote()
-                                    )
+                <Text style={styles.notesTitle}>Notes</Text>
+                <View style={styles.notesContainer}>
+                    <View style={styles.note}>
+                        <Text style={styles.noteItem}>{item.text}</Text>
+                        <TouchableOpacity
+                            style={styles.noteButtons}
+                            onPress={() =>
+                                Alert.alert(
+                                    'Delete from Toolkit?',
+                                    'Are you sure you wish to delete this note?',
+                                    [
+                                        {
+                                            text: 'Cancel',
+                                            onPress: () =>
+                                                console.log(
+                                                    'note not deleted'
+                                                ),
+                                            style: 'cancel'
+                                        },
+                                        {
+                                            text: 'OK',
+                                            onPress:() => 
+                                                dispatch(
+                                                    deleteNote()
+                                                )
+                                        }
+                                    ],
+                                    {cancelable: false}
+                                )
                             }
-                        ],
-                        {cancelable: false}
-                    )
-                }
-            >
-                <Text style={styles.deleteText}>DELETE NOTE</Text>
-            </TouchableOpacity>
-            </View>
-           </> 
+                        >
+                            <Text style={styles.deleteText}>DELETE NOTE</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </> 
         );
     };
 
@@ -94,20 +97,8 @@ const ResourceInfoScreen = ({ route }) => {
                         addToToolkit={() => dispatch(toggleAddToToolkit(resource.id))}
                         onShowModal={() => setShowModal(!showModal)}
                         />
-                    <Text style={styles.notesTitle}>Notes</Text>
                 </>
                 }
-                ListFooterComponent={
-                    <TouchableOpacity
-                    style={styles.noteButtons}
-                        onPress={() => setShowModal(!showModal)
-                            
-                        }
-                    >
-                        <Text style={styles.addNoteText}>ADD NOTE</Text>
-                    </TouchableOpacity>
-                }
-                
             />
             <Modal
                 animationType='slide'
@@ -178,18 +169,27 @@ const styles = StyleSheet.create({
         marginBottom: 0
       },
 
+    notesContainer: {
+        backgroundColor: '#fff',
+        padding: 5,
+        borderWidth: 1,
+        margin: 35,
+        marginTop: -1
+    },
     notesTitle: {
         textAlign: 'center',
         backgroundColor: '#1ab4d2',
         fontSize: 24,
         fontFamily: 'GochiHand_400Regular',
         color: '#43484D',
-        padding: 10,
-        margin: 15,
+        padding: 2,
+        margin: 35,
         marginBottom: 0,
-        borderRadius: 10,
         borderWidth: 1
     },
+
+
+
     note: {
         paddingVertical: 5,
         paddingHorizontal: 20,
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     },
     noteItem: {
         width: '100%',
-        fontSize: 18
+        fontSize: 16
     },
     noteButtons: {
         width: '100%',
@@ -210,11 +210,11 @@ const styles = StyleSheet.create({
         color: 'white',
         backgroundColor: '#f75832',
         borderRadius: 10,
-        fontWeight: '700',
         textAlign: 'center',
-        fontSize: 14,
-        width: 120,
-        padding: 5
+        fontSize: 12,
+        width: 100,
+        padding: 5,
+        margin: 5
     },
     addNoteText: {
         color: 'white',
