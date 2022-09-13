@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { Text, View, StyleSheet, PanResponder, Alert } from 'react-native';
+import { Text, View, StyleSheet, Share } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { baseUrl } from '../../shared/baseUrl';
 import * as Animatable from 'react-native-animatable';
@@ -9,6 +9,21 @@ import { useDispatch } from 'react-redux';
 const RenderResource = (props) => {
     const dispatch = useDispatch();
     const { resource, onShowModal } = props;
+
+    const ShareResource = (title, url) => {
+        Share.share(
+            {
+                title,
+                message: `${title} ${url}`,
+                url
+            },
+            {
+                dialogTitle: 'Share ' + title
+            }
+
+        )
+    }
+
     if (resource) {
         return (
             <Animatable.View
@@ -40,7 +55,7 @@ const RenderResource = (props) => {
                             raised
                             reverse
                             onPress={toggleAddToToolkit()}
-                        />
+                        /> 
                         
                         <Icon 
                             name={props.inToolkit ? 'undo' : 'user-plus'}
@@ -68,7 +83,11 @@ const RenderResource = (props) => {
                             aria-label='add resource'
                             raised
                             reverse
-                            onPress={() => toggleAddToToolkit()}
+                            onPress={() => 
+                                ShareResource(
+                                    resource.name,
+                                    resource.url
+                                )}
                         />
                     </View>
                 </Card>

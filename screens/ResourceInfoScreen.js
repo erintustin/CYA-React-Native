@@ -25,6 +25,7 @@ const ResourceInfoScreen = ({ route }) => {
         };
         dispatch(postNote(newNote));
         setShowModal(!showModal);
+        resetForm();
     };
 
     const handleEdit = () => {
