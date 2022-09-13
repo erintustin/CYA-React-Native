@@ -1,6 +1,6 @@
 import RenderResource from '../features/resources/RenderResource';
 import { useSelector, useDispatch } from 'react-redux';
-import { FlatList, StyleSheet, Text, View, Modal, Button, TouchableOpacity, Alert} from 'react-native';
+import { FlatList, StyleSheet, Text, View, Modal, Button, TouchableOpacity, Alert, Share} from 'react-native';
 import { TextInput } from 'react-native';
 import { postNote, deleteNote, editNote } from '../features/notes/notesSlice';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
@@ -38,44 +38,73 @@ const ResourceInfoScreen = ({ route }) => {
         setText('');
     };
 
-    const renderNoteItem = ({ item}) => {
+    const ShareResourceWithNote = (title, note, url) => {
+        Share.share(
+            {
+                title,
+                message: `${title}: ${url} --${note}`,
+                url
+            },
+            {
+                dialogTitle: 'Share ' + title + ' with note'
+            }
+
+        )
+    }
+
+
+    const renderNoteItem = ({ item }) => {
         return(
             <>
                 <Text style={styles.notesTitle}>Notes</Text>
                 <View style={styles.notesContainer}>
                     <View style={styles.note}>
                         <Text style={styles.noteItem}>{item.text}</Text>
-                        <TouchableOpacity
-                            style={styles.noteButtons}
-                            onPress={() =>
-                                Alert.alert(
-                                    'Delete from Toolkit?',
-                                    'Are you sure you wish to delete this note?',
-                                    [
-                                        {
-                                            text: 'Cancel',
-                                            onPress: () =>
-                                                console.log(
-                                                    'note not deleted'
-                                                ),
-                                            style: 'cancel'
-                                        },
-                                        {
-                                            text: 'OK',
-                                            onPress:() => 
-                                                dispatch(
-                                                    deleteNote()
-                                                )
-                                        }
-                                    ],
-                                    {cancelable: false}
-                                )
-                            }
-                        >
-                            <Text style={styles.deleteText}>DELETE NOTE</Text>
-                        </TouchableOpacity>
+                            <View style={styles.noteButtonContainer}>
+                                <TouchableOpacity
+                                    style={styles.noteButtons}
+                                        onPress={() => 
+                                            ShareResourceWithNote(
+                                                resource.name,
+                                                item.text,
+                                                resource.url
+                                            )}
+                                >
+                                    <Text style={styles.shareText}>SHARE</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={styles.noteButtons}
+                                    onPress={() =>
+                                        Alert.alert(
+                                            'Delete from Toolkit?',
+                                            'Are you sure you wish to delete this note?',
+                                            [
+                                                {
+                                                    text: 'Cancel',
+                                                    onPress: () =>
+                                                        console.log(
+                                                            'note not deleted'
+                                                        ),
+                                                    style: 'cancel'
+                                                },
+                                                {
+                                                    text: 'OK',
+                                                    onPress:() => 
+                                                        dispatch(
+                                                            deleteNote()
+                                                        )
+                                                }
+                                            ],
+                                            {cancelable: false}
+                                        )
+                                    }
+                                >
+                                    <Text style={styles.deleteText}>DELETE</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
                     </View>
-                </View>
+            
             </> 
         );
     };
@@ -174,7 +203,8 @@ const styles = StyleSheet.create({
         padding: 5,
         borderWidth: 1,
         margin: 35,
-        marginTop: -1
+        marginTop: -1,
+        marginBottom: 2
     },
     notesTitle: {
         textAlign: 'center',
@@ -188,23 +218,31 @@ const styles = StyleSheet.create({
         borderWidth: 1
     },
 
-
-
     note: {
         paddingVertical: 5,
         paddingHorizontal: 20,
         margin: 15,
         flexDirection: 'row',
         flexWrap: 'wrap',
+        justifyContent: 'center',
     },
     noteItem: {
         width: '100%',
-        fontSize: 16
+        fontSize: 16,
+    },
+
+    noteButtonContainer: {
+        width: '75%',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'row',
     },
     noteButtons: {
-        width: '100%',
+        width: '50%',
         margin: 10,
-        alignItems: 'center',
+        marginBottom: 2
+        
+
     },
     deleteText: {
         color: 'white',
@@ -212,19 +250,19 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: 'center',
         fontSize: 12,
-        width: 100,
+        width: 60,
         padding: 5,
         margin: 5
     },
-    addNoteText: {
+    shareText: {
         color: 'white',
-        backgroundColor: 'gray',
+        backgroundColor: '#1ab4d2',
         borderRadius: 10,
-        fontWeight: '700',
         textAlign: 'center',
-        fontSize: 20,
-        width: 150,
-        padding: 5
+        fontSize: 12,
+        width: 60,
+        padding: 5,
+        margin: 5
     },
     editText: {
         color: '#1ab4d2',

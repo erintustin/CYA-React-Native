@@ -11,7 +11,6 @@ const RenderResource = (props) => {
     const dispatch = useDispatch();
     const { resource, onShowModal } = props;
     
-
     const ShareResource = (title, url) => {
         Share.share(
             {
@@ -21,6 +20,20 @@ const RenderResource = (props) => {
             },
             {
                 dialogTitle: 'Share ' + title
+            }
+
+        )
+    }
+
+    const ShareResourceWithNote = (title, note, url) => {
+        Share.share(
+            {
+                title,
+                message: `${title}: ${url} --${note}`,
+                url
+            },
+            {
+                dialogTitle: 'Share ' + title + ' with note'
             }
 
         )
@@ -46,8 +59,8 @@ const RenderResource = (props) => {
                     <Card.Image source={{uri: baseUrl + resource.img}}>
                     
                     </Card.Image>
-                    <Text style={{ margin: 20 }}>By: {resource.author}</Text>
-                    <Text style={{ margin: 20 }}>Source: {resource.source}</Text>
+                    <Text style={{ marginTop: 5, marginBottom: 0 }}>By: {resource.author}</Text>
+                    <Text style={{ marginTop: 0, marginBottom: 20 }}>Source: {resource.source}</Text>
                 
                     <View style={styles.buttons}>
                         <Button 
@@ -86,7 +99,6 @@ const RenderResource = (props) => {
                                 )}
                             />
                     </View>
-                  
                 </Card>
             </Animatable.View>
         );
@@ -108,10 +120,12 @@ const styles = StyleSheet.create({
         flex: 2,
         flexWrap: 'wrap',
         flexDirection: 'row',
-        margin: 20,
+        
     },
     buttons: {
-        margin: 5
+        margin: 5,
+        marginLeft: 15,
+        marginRight: 15
     },
     cardText: {
         textShadowColor: 'rgba(0, 0, 0, 1)',
