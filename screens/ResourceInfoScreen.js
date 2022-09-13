@@ -34,7 +34,7 @@ const ResourceInfoScreen = ({ route }) => {
     }
     
     const resetForm = () => {
-        setText({text});
+        setText('');
     };
 
     const renderNoteItem = ({ item}) => {
@@ -43,7 +43,7 @@ const ResourceInfoScreen = ({ route }) => {
             <View style={styles.note}>
                 <Text style={styles.noteItem}>{item.text}</Text>
             <TouchableOpacity
-            style={styles.noteButtons}
+                style={styles.noteButtons}
                 onPress={() =>
                     Alert.alert(
                         'Delete from Toolkit?',
@@ -69,9 +69,8 @@ const ResourceInfoScreen = ({ route }) => {
                     )
                 }
             >
-                <Text style={styles.deleteText}>DELETE</Text>
+                <Text style={styles.deleteText}>DELETE NOTE</Text>
             </TouchableOpacity>
-            
             </View>
            </> 
         );
@@ -95,16 +94,19 @@ const ResourceInfoScreen = ({ route }) => {
                         onShowModal={() => setShowModal(!showModal)}
                         />
                     <Text style={styles.notesTitle}>Notes</Text>
-                    <TouchableOpacity
-            style={styles.noteButtons}
-                onPress={() => setShowModal(!showModal)
-                    
-                }
-            >
-                <Text style={styles.addNoteText}>ADD NOTE</Text>
-            </TouchableOpacity>
                 </>
                 }
+                ListFooterComponent={
+                    <TouchableOpacity
+                    style={styles.noteButtons}
+                        onPress={() => setShowModal(!showModal)
+                            
+                        }
+                    >
+                        <Text style={styles.addNoteText}>ADD NOTE</Text>
+                    </TouchableOpacity>
+                }
+                
             />
             <Modal
                 animationType='slide'
@@ -210,7 +212,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 14,
-        width: 75,
+        width: 120,
         padding: 5
     },
     addNoteText: {
@@ -219,8 +221,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         fontWeight: '700',
         textAlign: 'center',
-        fontSize: 14,
-        width: 90,
+        fontSize: 20,
+        width: 150,
         padding: 5
     },
     editText: {

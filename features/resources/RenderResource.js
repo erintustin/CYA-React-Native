@@ -3,8 +3,11 @@ import { Text, View, StyleSheet, PanResponder, Alert } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { baseUrl } from '../../shared/baseUrl';
 import * as Animatable from 'react-native-animatable';
+import { toggleAddToToolkit } from '../myToolkit/myToolkitSlice';
+import { useDispatch } from 'react-redux';
 
 const RenderResource = (props) => {
+    const dispatch = useDispatch();
     const { resource, onShowModal } = props;
     if (resource) {
         return (
@@ -29,14 +32,26 @@ const RenderResource = (props) => {
                     <Text style={{ margin: 20 }}>By: {resource.author}</Text>
                     <Text style={{ margin: 20 }}>Source: {resource.source}</Text>
                     <View style={styles.cardRow}>
-                        <Icon 
-                            name={props.inToolkit ? 'minus' : 'plus'}
+                    <Icon 
+                            name='eye'
                             type='font-awesome'
                             color='#1ab4d2'
                             aria-label='add resource'
                             raised
                             reverse
-                            onPress={() => props.inToolkit ? console.log ('Already in Toolkit') : props.addToToolkit()}
+                            onPress={toggleAddToToolkit()}
+                        />
+                        
+                        <Icon 
+                            name={props.inToolkit ? 'undo' : 'user-plus'}
+                            type='font-awesome'
+                            color='#1ab4d2'
+                            aria-label='add resource'
+                            raised
+                            reverse
+                            onPress={() => 
+                                dispatch(
+                                    toggleAddToToolkit(resource.id))}
                         />
                         <Icon
                             name='pencil'
@@ -45,6 +60,15 @@ const RenderResource = (props) => {
                             raised
                             reverse
                             onPress={props.onShowModal}
+                        />
+                        <Icon 
+                            name='share'
+                            type='font-awesome'
+                            color='#1ab4d2'
+                            aria-label='add resource'
+                            raised
+                            reverse
+                            onPress={() => toggleAddToToolkit()}
                         />
                     </View>
                 </Card>

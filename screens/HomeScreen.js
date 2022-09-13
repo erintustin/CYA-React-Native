@@ -1,7 +1,5 @@
-import { Text, View, Animated, ImageBackground, Image, StyleSheet } from 'react-native';
+import { Text, View, Animated, ImageBackground, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import { ListItem, Avatar, Card } from 'react-native-elements';
-import { useSelector } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
 import confetti from '../assets/img/confettiBg.png';
 import logo from '../assets/img/CYAlogo.png';
 import cake from '../assets/img/cake.png';
@@ -11,6 +9,7 @@ import headericon1 from '../assets/img/headerIcon1.png';
 import headericon2 from '../assets/img/headerIcon2.png';
 import headericon3 from '../assets/img/headerIcon3.png';
 import { useEffect, useRef } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const CoreValues = () => {
     return(
@@ -57,6 +56,7 @@ const CoreValues = () => {
     );
 }
 const BrowseResources = () => {
+    const navigation = useNavigation();
     return(
         <Card
             containerStyle={{ padding: 0 }}
@@ -66,12 +66,20 @@ const BrowseResources = () => {
                     source={cake}
                     style={{resizeMode: 'contain'}}
                 >
+                
                    <View style={{ justifyContent: 'center', flex: 1 }}>
-                <Text
-                    style={styles.cardTitle}>
-                    BROWSE RESOURCES
-                </Text>
+                    <TouchableOpacity 
+                    
+                    onPress={() =>
+                            navigation.navigate('Directory')
+                            }> 
+                    <Text
+                        style={styles.cardTitle}>
+                        BROWSE RESOURCES
+                    </Text>
+                    </TouchableOpacity>
                 </View>
+               
                 
                 </Card.Image>
         </Card>
@@ -79,6 +87,7 @@ const BrowseResources = () => {
 };
 
 const MyToolkit = () => {
+    const navigation = useNavigation();
     return(
         <Card 
             containerStyle={{ padding: 0 }}
@@ -89,12 +98,18 @@ const MyToolkit = () => {
                     source={squishmallow}
                     style={{resizeMode: 'contain', justifyContent: 'center'}}
                 >
-                   <View style={{ justifyContent: 'center', flex: 1 }}>
-                <Text
-                    style={styles.cardTitle}>
-                    MY TOOLKIT
-                </Text>
-                </View>
+                    <View style={{ justifyContent: 'center', flex: 1 }}>
+                        <TouchableOpacity 
+                        
+                        onPress={() =>
+                                navigation.navigate('MyToolkit')
+                                }> 
+                        <Text
+                            style={styles.cardTitle}>
+                            MY TOOLKIT
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
                 
                 </Card.Image>
         </Card>

@@ -3,7 +3,7 @@ import { ListItem, Avatar } from 'react-native-elements';
 import { useSelector } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import Loading  from '../components/LoadingComponent';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
@@ -26,6 +26,7 @@ const DirectoryScreen = ({ navigation }) => {
                     onPress={() =>
                     navigation.navigate('ResourceInfo', { resource })
                 }>
+                    
                     <Avatar 
                         source={{uri: baseUrl + resource.img}}
                         rounded
