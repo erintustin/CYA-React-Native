@@ -5,10 +5,12 @@ import { baseUrl } from '../../shared/baseUrl';
 import * as Animatable from 'react-native-animatable';
 import { toggleAddToToolkit } from '../myToolkit/myToolkitSlice';
 import { useDispatch } from 'react-redux';
+import * as Linking from 'expo-linking';
 
 const RenderResource = (props) => {
     const dispatch = useDispatch();
     const { resource, onShowModal } = props;
+    
 
     const ShareResource = (title, url) => {
         Share.share(
@@ -54,7 +56,7 @@ const RenderResource = (props) => {
                             aria-label='add resource'
                             raised
                             reverse
-                            onPress={toggleAddToToolkit()}
+                            onPress={() => Linking.openURL(resource.url)}
                         /> 
                         
                         <Icon 
