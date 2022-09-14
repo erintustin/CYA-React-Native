@@ -1,13 +1,17 @@
-import { FlatList, Text, View, Modal, StyleSheet, TextInput } from 'react-native';
+import { FlatList, Text, View, Modal, StyleSheet, Alert, TouchableOpacity } from 'react-native';
 import { ListItem, Avatar, Icon } from 'react-native-elements';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Loading  from '../components/LoadingComponent';
 import * as Animatable from 'react-native-animatable';
 import { useState } from 'react';
+import { SwipeRow } from 'react-native-swipe-list-view';
+import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
     const [showAddResourceModal, setShowAddResourceModal] = useState(false);
+    const dispatch = useDispatch();
+    const myToolkitResources = useSelector((state) => state.myToolkitResources);
 
     if (resources.isLoading) {
         return <Loading />;
@@ -21,8 +25,61 @@ const DirectoryScreen = ({ navigation }) => {
     }
 
     const renderDirectoryItem = ({item: resource}) => {
+        const addToToolkit = () => {
+            if (myToolkitResources.some(resource => resource.name === resource.name)) {
+                return (
+            Alert.alert(
+                'Already in Toolkit',
+                '"' + resource.name + '" By ' + resource.author + 'is already in your toolkit',
+                [
+                    {
+                        text: 'Cancel',
+                        onPress: () =>
+                            console.log(
+                                resource.name + 'already in toolkit'
+                            ),
+                        style: 'cancel'
+                    },
+                ],
+                {cancelable: false}
+            ))
+        } else {
+            return (
+            Alert.alert(
+                'Add to Toolkit?',
+                 '"' + resource.name + '" By ' + resource.author + ' will be added to your Toolkit.',
+                [
+                    {
+                        text: 'Cancel',
+                        onPress: () =>
+                            console.log(
+                                resource.name + ' not added'
+                            ),
+                        style: 'cancel'
+                    },
+                    {
+                        text: 'OK',
+                        onPress:() => 
+                            dispatch(
+                                toggleAddToToolkit(resource.id)
+                            )
+                    }
+                ],
+                {cancelable: false}
+            )
+        )}};
+        
         return(
             <Animatable.View animation='fadeInRightBig' duration={2000}>
+                <SwipeRow rightOpenValue={-100}>
+                <View style={styles.addToToolkitView}>
+                    <TouchableOpacity 
+                        style={styles.toolkitTouchable}
+                        onPress={() => addToToolkit()}
+                    >
+                        <Text style={styles.addToToolkitText}>Add to Toolkit</Text>
+                    </TouchableOpacity>
+                </View>
                 <ListItem
                     onPress={() =>
                     navigation.navigate('ResourceInfo', { resource })
@@ -38,6 +95,7 @@ const DirectoryScreen = ({ navigation }) => {
                         <ListItem.Subtitle>Source: {resource.source}</ListItem.Subtitle>
                     </ListItem.Content>
                 </ListItem>
+                </SwipeRow>
             </Animatable.View>
         );
     };
@@ -102,7 +160,25 @@ const styles = StyleSheet.create({
         color: "gray",
         fontSize: 24,
         fontWeight: 'bold'
-      }
+      },
+      toolkitTouchable: {
+        backgroundColor: '#1ab4d2',
+        height: '100%',
+        justifyContent: 'center'
+    },
+    addToToolkitView: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'center',
+        flex: 1
+    },
+    addToToolkitText: {
+        color: 'white',
+        fontWeight: '700',
+        textAlign: 'center',
+        fontSize: 16,
+        width: 100
+    },
     });
 
 

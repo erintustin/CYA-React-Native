@@ -1,6 +1,5 @@
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { Avatar, ListItem, Icon } from 'react-native-elements';
-import { baseUrl } from '../shared/baseUrl';
 import { useDispatch, useSelector } from 'react-redux';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
@@ -60,7 +59,7 @@ const myToolkitScreen = ({ navigation }) => {
                     >
                         <Avatar 
                             rounded
-                            source={{ uri: baseUrl + resource.img }} 
+                            source={{ uri: resource.img }} 
                         />
                         <ListItem.Content>
                             <ListItem.Title>{resource.name}</ListItem.Title>
@@ -96,6 +95,15 @@ const myToolkitScreen = ({ navigation }) => {
             />
              <Text style={styles.directoryNavigation}>FIND RESOURCES</Text>
         </ListItem>
+        <Animatable.View animation='fadeInRightBig' duration={2000}>
+            <FlatList  
+                data={resourcesArray.filter((resource) =>
+                    myToolkitResources.includes(resource.id)
+                )}
+                renderItem={renderMyToolkitResource}
+                keyExtractor={(item) => item.id.toString()}
+            />
+        </Animatable.View>
         <ListItem
             containerStyle={{backgroundColor: 'lightgray', justifyContent: 'center'}}
             onPress={() => navigation.navigate('Directory')}>
@@ -106,15 +114,6 @@ const myToolkitScreen = ({ navigation }) => {
             />
              <Text style={styles.directoryNavigation}>SHARE TOOLKIT</Text>
         </ListItem>
-        <Animatable.View animation='fadeInRightBig' duration={2000}>
-            <FlatList  
-                data={resourcesArray.filter((resource) =>
-                    myToolkitResources.includes(resource.id)
-                )}
-                renderItem={renderMyToolkitResource}
-                keyExtractor={(item) => item.id.toString()}
-            />
-        </Animatable.View>
         </>
     );
 };
