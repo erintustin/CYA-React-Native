@@ -2,7 +2,7 @@ import RenderResource from '../features/resources/RenderResource';
 import { useSelector, useDispatch } from 'react-redux';
 import { FlatList, StyleSheet, Text, View, Modal, Button, TouchableOpacity, Alert, Share} from 'react-native';
 import { TextInput } from 'react-native';
-import { postNote, deleteNote, editNote } from '../features/notes/notesSlice';
+import { postNote, deleteNote} from '../features/notes/notesSlice';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import { useState } from 'react';
 
@@ -14,7 +14,6 @@ const ResourceInfoScreen = ({ route }) => {
     const notes = useSelector((state) => state.notes);
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
     const [showModal, setShowModal] = useState(false);
-    const [showEditModal, setShowEditModal] = useState(false);
     const [text, setText] = useState('');
     const dispatch = useDispatch();
 
@@ -27,12 +26,6 @@ const ResourceInfoScreen = ({ route }) => {
         setShowModal(!showModal);
         resetForm();
     };
-
-    const handleEdit = () => {
-        
-        dispatch(editNote());
-        setShowEditModal(!showEditModal);
-    }
     
     const resetForm = () => {
         setText('');
@@ -42,7 +35,7 @@ const ResourceInfoScreen = ({ route }) => {
         Share.share(
             {
                 title,
-                message: `${title}: ${url} --${note}`,
+                message: `${note} ${title}`,
                 url
             },
             {
@@ -70,7 +63,7 @@ const ResourceInfoScreen = ({ route }) => {
                                                 resource.url
                                             )}
                                 >
-                                    <Text style={styles.shareText}>SHARE</Text>
+                                    <Text style={styles.shareText}>SHARE WITH NOTE</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.noteButtons}
@@ -225,6 +218,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap',
         justifyContent: 'center',
+        alignItems: 'center'
     },
     noteItem: {
         width: '100%',
@@ -232,17 +226,19 @@ const styles = StyleSheet.create({
     },
 
     noteButtonContainer: {
-        width: '75%',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
+        flexWrap: 'nowrap',
     },
     noteButtons: {
         width: '50%',
-        margin: 10,
-        marginBottom: 2
+        marginLeft: 10,
+        marginTop: 5,
+        marginBottom: 0,
+        alignItems: 'center'
         
-
     },
     deleteText: {
         color: 'white',
@@ -260,17 +256,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         textAlign: 'center',
         fontSize: 12,
-        width: 60,
+        width: 130,
         padding: 5,
         margin: 5
     },
-    editText: {
-        color: '#1ab4d2',
-        fontWeight: '700',
-        textAlign: 'center',
-        fontSize: 16,
-        width: 75
-    }
 });
 
 export default ResourceInfoScreen;

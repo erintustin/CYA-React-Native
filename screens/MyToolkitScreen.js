@@ -1,5 +1,5 @@
 import { View, FlatList, Text, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { Avatar, ListItem } from 'react-native-elements';
+import { Avatar, ListItem, Icon } from 'react-native-elements';
 import { baseUrl } from '../shared/baseUrl';
 import { useDispatch, useSelector } from 'react-redux';
 import { SwipeRow } from 'react-native-swipe-list-view';
@@ -13,6 +13,7 @@ const myToolkitScreen = ({ navigation }) => {
         );
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
     const dispatch = useDispatch();
+    
 
     const renderMyToolkitResource = ({ item: resource }) => {
         return(
@@ -84,6 +85,27 @@ const myToolkitScreen = ({ navigation }) => {
     }
 
     return(
+        <>
+        <ListItem
+            containerStyle={{backgroundColor: 'lightgray', justifyContent: 'center'}}
+            onPress={() => navigation.navigate('Directory')}>
+            <Icon
+                name='list'
+                type='font-awesome'
+                color='gray'
+            />
+             <Text style={styles.directoryNavigation}>FIND RESOURCES</Text>
+        </ListItem>
+        <ListItem
+            containerStyle={{backgroundColor: 'lightgray', justifyContent: 'center'}}
+            onPress={() => navigation.navigate('Directory')}>
+            <Icon
+                name='share'
+                type='font-awesome'
+                color='gray'
+            />
+             <Text style={styles.directoryNavigation}>SHARE TOOLKIT</Text>
+        </ListItem>
         <Animatable.View animation='fadeInRightBig' duration={2000}>
             <FlatList  
                 data={resourcesArray.filter((resource) =>
@@ -93,6 +115,7 @@ const myToolkitScreen = ({ navigation }) => {
                 keyExtractor={(item) => item.id.toString()}
             />
         </Animatable.View>
+        </>
     );
 };
 
@@ -114,7 +137,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 16,
         width: 100
-    }
+    },
+    directoryNavigation: {
+        color: "gray",
+        fontSize: 24,
+        fontWeight: 'bold'
+      }
 });
 
 export default myToolkitScreen;

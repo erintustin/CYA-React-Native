@@ -25,19 +25,7 @@ const RenderResource = (props) => {
         )
     }
 
-    const ShareResourceWithNote = (title, note, url) => {
-        Share.share(
-            {
-                title,
-                message: `${title}: ${url} --${note}`,
-                url
-            },
-            {
-                dialogTitle: 'Share ' + title + ' with note'
-            }
-
-        )
-    }
+   
 
     if (resource) {
         return (
@@ -56,7 +44,7 @@ const RenderResource = (props) => {
                                 {resource.name}
                             </Text>
                     
-                    <Card.Image source={{uri: baseUrl + resource.img}}>
+                    <Card.Image source={{uri: resource.img}}>
                     
                     </Card.Image>
                     <Text style={{ marginTop: 5, marginBottom: 0 }}>By: {resource.author}</Text>

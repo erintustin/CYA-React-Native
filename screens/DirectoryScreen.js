@@ -1,7 +1,6 @@
 import { FlatList, Text, View, Modal, StyleSheet, TextInput } from 'react-native';
 import { ListItem, Avatar, Icon } from 'react-native-elements';
 import { useSelector } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
 import Loading  from '../components/LoadingComponent';
 import * as Animatable from 'react-native-animatable';
 import { useState } from 'react';
@@ -30,7 +29,7 @@ const DirectoryScreen = ({ navigation }) => {
                 }>
                     
                     <Avatar 
-                        source={{uri: baseUrl + resource.img}}
+                        source={{uri: resource.img}}
                         rounded
                     />
                     <ListItem.Content>
@@ -104,8 +103,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         fontWeight: 'bold'
       }
-
-
     });
 
 
