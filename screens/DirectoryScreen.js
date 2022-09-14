@@ -33,6 +33,13 @@ const DirectoryScreen = ({ navigation }) => {
                 '"' + resource.name + '" By ' + resource.author + ' is already in your toolkit',
                 [
                     {
+                        text: 'Remove',
+                        onPress: () => 
+                        dispatch(
+                            toggleAddToToolkit(resource.id)
+                        ),
+                    },
+                    {
                         text: 'Cancel',
                         onPress: () =>
                             console.log(
