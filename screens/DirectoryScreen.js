@@ -26,11 +26,11 @@ const DirectoryScreen = ({ navigation }) => {
 
     const renderDirectoryItem = ({item: resource}) => {
         const addToToolkit = () => {
-            if (myToolkitResources.some(resource => resource.name === resource.name)) {
+            if (myToolkitResources.some(resourceId => resourceId === resource.id)) {
                 return (
             Alert.alert(
                 'Already in Toolkit',
-                '"' + resource.name + '" By ' + resource.author + 'is already in your toolkit',
+                '"' + resource.name + '" By ' + resource.author + ' is already in your toolkit',
                 [
                     {
                         text: 'Cancel',
