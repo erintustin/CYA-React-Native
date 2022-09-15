@@ -7,7 +7,7 @@ const NewResourceForm = () => {
     const [source, setSource] = useState('');
     const [url, setUrl] = useState('');
 
-    const handleAddResource = () => {
+    const handleSubmit = () => {
         console.log("title: " + title);
         console.log("author: " + author);
         console.log("source: " + source);
@@ -29,7 +29,7 @@ const NewResourceForm = () => {
                     width='95%'
                     style={styles.textInput}
                     placeholder='Resource Title'
-                    onChangeText={(text) => setText(text)}
+                    onChangeText={(title) => setTitle(title)}
                     value={title}
                 />
             </View>
@@ -41,7 +41,7 @@ const NewResourceForm = () => {
                     width='95%'
                     style={styles.textInput}
                     placeholder='Resource Author'
-                    onChangeText={(text) => setText(text)}
+                    onChangeText={(author) => setAuthor(author)}
                     value={author}
                 />
             </View>
@@ -53,7 +53,7 @@ const NewResourceForm = () => {
                     width='95%'
                     style={styles.textInput}
                     placeholder='Source'
-                    onChangeText={(text) => setText(text)}
+                    onChangeText={(source) => setSource(source)}
                     value={source}
                 />
             </View>
@@ -65,13 +65,13 @@ const NewResourceForm = () => {
                     width='95%'
                     style={styles.textInput}
                     placeholder='Resource URL'
-                    onChangeText={(text) => setText(text)}
+                    onChangeText={(url) => setUrl(url)}
                     value={url}
                 />
             </View>
             <View style={styles.formRow}>
             <Button
-                onPress={() => handleAddResource()}
+                onPress={() => handleSubmit()}
                 title='Add Resource'
                 color='#1ab4d2'
                 accessibilityLabel='Tap me to add your resource to the directory.'

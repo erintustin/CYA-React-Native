@@ -7,7 +7,7 @@ const Loading = () => {
                 size='large'
                 color='#1ab4d2' 
                 />
-            <Text style={styles.loadingText}>Loading</Text>
+            <Text style={styles.loadingText}>Loading . . .</Text>
         </View>
     )
 };
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     loadingText: {
-        color: '#5637DD',
+        color: '#000',
         fontSize: 14,
         fontWeight: 'bold'
     }

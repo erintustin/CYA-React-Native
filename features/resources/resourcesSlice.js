@@ -13,7 +13,11 @@ export const fetchResources = createAsyncThunk(
 const resourcesSlice = createSlice({
     name: 'resources',
     initialState: { isLoading: true, errMess: null, resourcesArray: [] },
-    reducers: {},
+    reducers: {
+        addResource: (state, action) => {
+            state.resourcesArray.push(action.payload);
+        },
+    },
     extraReducers: {
         [fetchResources.pending]: (state) => {
             state.isLoading = true;
@@ -31,3 +35,4 @@ const resourcesSlice = createSlice({
 });
 
 export const resourcesReducer = resourcesSlice.reducer;
+export const { addResource } = resourcesSlice.actions;
