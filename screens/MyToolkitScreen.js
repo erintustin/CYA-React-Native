@@ -93,7 +93,7 @@ const myToolkitScreen = ({ navigation }) => {
                 type='font-awesome'
                 color='gray'
             />
-             <Text style={styles.directoryNavigation}>FIND RESOURCES</Text>
+             <Text style={styles.directoryNavigation}>VIEW RESOURCE DIRECTORY</Text>
         </ListItem>
         <Animatable.View animation='fadeInRightBig' duration={2000}>
             <FlatList  

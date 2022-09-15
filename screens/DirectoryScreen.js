@@ -1,4 +1,4 @@
-import { FlatList, Text, View, Modal, StyleSheet, Alert, TouchableOpacity } from 'react-native';
+import { FlatList, Text, View, Modal, StyleSheet, Alert, TouchableOpacity, Share } from 'react-native';
 import { ListItem, Avatar, Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import Loading  from '../components/LoadingComponent';
@@ -6,6 +6,7 @@ import * as Animatable from 'react-native-animatable';
 import { useState } from 'react';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
+import NewResourceForm from '../components/NewResourceForm';
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
@@ -22,69 +23,102 @@ const DirectoryScreen = ({ navigation }) => {
                 <Text>{resources.errMess}</Text>
             </View>
         );
-    }
+    };
 
     const renderDirectoryItem = ({item: resource}) => {
         const addToToolkit = () => {
             if (myToolkitResources.some(resourceId => resourceId === resource.id)) {
                 return (
-            Alert.alert(
-                'Already in Toolkit',
-                '"' + resource.name + '" By ' + resource.author + ' is already in your toolkit',
-                [
-                    {
-                        text: 'Remove',
-                        onPress: () => 
-                        dispatch(
-                            toggleAddToToolkit(resource.id)
-                        ),
-                    },
-                    {
-                        text: 'Cancel',
-                        onPress: () =>
-                            console.log(
-                                resource.name + 'already in toolkit'
-                            ),
-                        style: 'cancel'
-                    },
-                ],
-                {cancelable: false}
-            ))
-        } else {
-            return (
-            Alert.alert(
-                'Add to Toolkit?',
-                 '"' + resource.name + '" By ' + resource.author + ' will be added to your Toolkit.',
-                [
-                    {
-                        text: 'Cancel',
-                        onPress: () =>
-                            console.log(
-                                resource.name + ' not added'
-                            ),
-                        style: 'cancel'
-                    },
-                    {
-                        text: 'OK',
-                        onPress:() => 
-                            dispatch(
-                                toggleAddToToolkit(resource.id)
-                            )
-                    }
-                ],
-                {cancelable: false}
+                    Alert.alert(
+                        'Already in Toolkit',
+                        '"' + resource.name + '" By ' + resource.author + ' is already in your toolkit',
+                        [
+                            {
+                                text: 'Remove',
+                                onPress: () => 
+                                dispatch(
+                                    toggleAddToToolkit(resource.id)
+                                ),
+                            },
+                            {
+                                text: 'Cancel',
+                                onPress: () =>
+                                    console.log(
+                                        resource.name + 'already in toolkit'
+                                    ),
+                                style: 'cancel'
+                            },
+                        ],
+                        {cancelable: false}
+                    ))
+                } else {
+                    return (
+                    Alert.alert(
+                        'Add to Toolkit?',
+                        '"' + resource.name + '" By ' + resource.author + ' will be added to your Toolkit.',
+                        [
+                            {
+                                text: 'Cancel',
+                                onPress: () =>
+                                    console.log(
+                                        resource.name + ' not added'
+                                    ),
+                                style: 'cancel'
+                            },
+                            {
+                                text: 'OK',
+                                onPress:() => 
+                                    dispatch(
+                                        toggleAddToToolkit(resource.id)
+                                    )
+                            }
+                        ],
+                        {cancelable: false}
+                    )
+                )
+            }
+        };
+
+        const ShareResource = (title, url) => {
+            Share.share(
+                {
+                    title,
+                    message: `${title} ${url}`,
+                    url
+                },
+                {
+                    dialogTitle: 'Share ' + title
+                }
+    
             )
-        )}};
-        
+        }
         return(
             <Animatable.View animation='fadeInRightBig' duration={2000}>
-                <SwipeRow rightOpenValue={-100}>
+                <SwipeRow rightOpenValue={-200}>
                 <View style={styles.addToToolkitView}>
                     <TouchableOpacity 
                         style={styles.toolkitTouchable}
                         onPress={() => addToToolkit()}
                     >
-                        <Text style={styles.addToToolkitText}>Add to Toolkit</Text>
+                        <Text style={styles.addToToolkitText}>ADD TO TOOLKIT</Text>
+                        <Icon
+                        type='font-awesome'
+                        name='user-plus'
+                        color='#fff' />
+                    </TouchableOpacity>
+                    <TouchableOpacity 
+                        style={styles.shareTouchable}
+                        onPress={() => 
+                            ShareResource(
+                                resource.name,
+                                resource.url
+                            )}
+                    >
+                        <Text style={styles.shareText}>SHARE RESOURCE</Text>
+                        <Icon
+                        type='font-awesome'
+                        name='share'
+                        color='#fff' />
                     </TouchableOpacity>
                 </View>
                 <ListItem
@@ -134,7 +168,10 @@ const DirectoryScreen = ({ navigation }) => {
                 onRequestClose={() => setShowAddResourceModal(!showAddResourceModal)}
             >
                 <View style={styles.modal}>
-                    <Text style={styles.modalHeader}>Add Notes</Text>
+                    <Text style={styles.modalHeader}>Add New Resource</Text>
+                    <View style={styles.formContainer}>
+                    <NewResourceForm />
+                    </View>
                     
                     
                 </View>
@@ -152,14 +189,14 @@ const styles = StyleSheet.create({
     },
     modalHeader: {
         backgroundColor: '#1ab4d2', 
-        borderRadius: 10,
+        borderWidth: 1,
         fontSize: 30,
-        padding: 10,
+        padding: 5,
         textAlign: 'center',
         fontFamily: 'GochiHand_400Regular',
         marginTop: 20,
-        marginLeft: 10,
-        marginRight: 7,
+        marginLeft: 0,
+        marginRight: 0,
         marginBottom: 0
       },
 
@@ -183,9 +220,26 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '700',
         textAlign: 'center',
-        fontSize: 16,
+        fontSize: 14,
         width: 100
     },
+    shareTouchable: {
+        backgroundColor: 'gray',
+        height: '100%',
+        justifyContent: 'center'
+    },
+    shareText: {
+        color: 'white',
+        fontWeight: '700',
+        textAlign: 'center',
+        fontSize: 14,
+        width: 100
+    },
+    formContainer: {
+        borderWidth: 1,
+        paddingTop: 20,
+        marginTop: -1
+    }
     });
 
 

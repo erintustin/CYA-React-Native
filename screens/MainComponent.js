@@ -10,7 +10,7 @@ import HomeScreen from './HomeScreen';
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
 import myToolkitScreen from './MyToolkitScreen';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchResources } from '../features/resources/resourcesSlice';
 import { fetchNotes } from '../features/notes/notesSlice';
@@ -49,6 +49,7 @@ const HomeNavigator = () => {
 };
 
 const DirectoryNavigator = () => {
+
     const Stack = createStackNavigator();
     return(
         <Stack.Navigator
@@ -73,8 +74,10 @@ const DirectoryNavigator = () => {
             <Stack.Screen 
                 name='ResourceInfo'
                 component={ResourceInfoScreen}
+                getId={({ params }) => params.id}
                 options={({route}) => ({
-                    title: route.params.resource.name
+                    title: route.params.resource.name,
+                    gesturesEnabled: true
                 })}
             />
         </Stack.Navigator>
