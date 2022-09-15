@@ -18,6 +18,7 @@ export const postResource = createAsyncThunk(
             setTimeout(() => {
                 const { resources } = getState();
                 payload.id = resources.resourcesArray.length;
+                payload.name = 
                 dispatch(addResource(payload));
             }, 2000);
     }

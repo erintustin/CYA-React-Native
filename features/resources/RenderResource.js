@@ -1,7 +1,5 @@
-import { useRef } from 'react';
 import { Text, View, StyleSheet, Share, Button } from 'react-native';
-import { Card, Icon } from 'react-native-elements';
-import { baseUrl } from '../../shared/baseUrl';
+import { Card } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 import { toggleAddToToolkit } from '../myToolkit/myToolkitSlice';
 import { useDispatch } from 'react-redux';

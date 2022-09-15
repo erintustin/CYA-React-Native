@@ -41,10 +41,8 @@ const ResourceInfoScreen = ({ route }) => {
             {
                 dialogTitle: 'Share ' + title + ' with note'
             }
-
         )
-    }
-
+    };
 
     const renderNoteItem = ({ item }) => {
         return(
@@ -97,7 +95,6 @@ const ResourceInfoScreen = ({ route }) => {
                             </View>
                         </View>
                     </View>
-            
             </> 
         );
     };
