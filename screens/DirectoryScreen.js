@@ -1,18 +1,47 @@
-import { FlatList, Text, View, Modal, StyleSheet, Alert, TouchableOpacity, Share } from 'react-native';
+import { FlatList, Text, ScrollView, View, Modal, StyleSheet, 
+        Alert, TouchableOpacity, Share, Button, TextInput } from 'react-native';
 import { ListItem, Avatar, Icon } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
+import { useState } from 'react';
 import Loading  from '../components/LoadingComponent';
 import * as Animatable from 'react-native-animatable';
-import { useState } from 'react';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
-import NewResourceForm from '../components/NewResourceForm';
+import { postResource } from "../features/resources/resourcesSlice";
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
-    const [showAddResourceModal, setShowAddResourceModal] = useState(false);
-    const dispatch = useDispatch();
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
+
+    const [showAddResourceModal, setShowAddResourceModal] = useState(false);
+    const [name, setName] = useState('');
+    const [author, setAuthor] = useState('');
+    const [source, setSource] = useState('');
+    const [url, setUrl] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+
+        const id = resources.length + 1;
+        const newResource = {
+            id: id.toString(),
+            name: name,
+            author: author,
+            source: source,
+            url: url
+        };
+        dispatch(postResource(newResource));
+        setShowAddResourceModal(!showAddResourceModal);
+        resetForm();
+    };
+
+    const resetForm = () => {
+        setName('');
+        setAuthor('');
+        setSource('');
+        setUrl('');
+    };
+    
 
     if (resources.isLoading) {
         return <Loading />;
@@ -160,25 +189,88 @@ const DirectoryScreen = ({ navigation }) => {
         />
 
 
-<Modal
-                animationType='slide'
-                transparent={false}
-                visible={showAddResourceModal}
-                style={{margin: 10}}
-                onRequestClose={() => setShowAddResourceModal(!showAddResourceModal)}
-            >
-                <View style={styles.modal}>
-                    <Text style={styles.modalHeader}>Add New Resource</Text>
-                    <View style={styles.formContainer}>
-                    <NewResourceForm />
+        <Modal
+            animationType='slide'
+            transparent={false}
+            visible={showAddResourceModal}
+            style={{margin: 10}}
+            onRequestClose={() => setShowAddResourceModal(!showAddResourceModal)}
+        >
+        <ScrollView>
+            <View style={styles.modal}>
+                <Text style={styles.modalHeader}>Add New Resource</Text>
+                <View style={styles.formContainer}>
+                    <View style={styles.formRow}>
+                        <Text style={styles.formLabel}>
+                            Title:
+                        </Text>
+                        <TextInput
+                            width='95%'                                
+                            style={styles.textInput}
+                            placeholder='Resource Name'
+                            onChangeText={(name) => setName(name)}
+                            value={name}
+                        />
                     </View>
+                    <View style={styles.formRow}>
+                        <Text style={styles.formLabel}>
+                            Author:
+                        </Text>
+                        <TextInput
+                            width='95%'
+                            style={styles.textInput}
+                            placeholder='Resource Author'
+                            onChangeText={(author) => setAuthor(author)}
+                            value={author}
+                        />
+                    </View>
+                    <View style={styles.formRow}>
+                        <Text style={styles.formLabel}>
+                            Source:
+                        </Text>
+                        <TextInput
+                            width='95%'
+                            style={styles.textInput}
+                            placeholder='Source'
+                            onChangeText={(source) => setSource(source)}
+                            value={source}
+                        />
+                    </View>
+                    <View style={styles.formRow}>
+                        <Text style={styles.formLabel}>
+                            URL:
+                        </Text>
+                        <TextInput
+                            width='95%'
+                            style={styles.textInput}
+                            placeholder='Resource URL'
+                            onChangeText={(url) => setUrl(url)}
+                            value={url}
+                        />
+                    </View>
+                    <View style={styles.formButtons}>
+                        <Button
+                            onPress={() => handleSubmit()}
+                            title='Add Resource'
+                            color='#1ab4d2'
+                            accessibilityLabel='Tap me to add your resource to the directory.'
+                        />
                     
-                    
+                        <Button
+                            onPress={() => {
+                                setShowAddResourceModal(!showAddResourceModal);
+                                resetForm();
+                            }}
+                            color='gray'
+                            title='Cancel'
+                        />
+                    </View>
                 </View>
-            </Modal>
-        </>
+            </View>
+        </ScrollView>        
+    </Modal>
+    </>
     );
-
 };
 
 const styles = StyleSheet.create({
@@ -200,12 +292,12 @@ const styles = StyleSheet.create({
         marginBottom: 0
       },
 
-      addResource: {
+    addResource: {
         color: "gray",
         fontSize: 24,
         fontWeight: 'bold'
       },
-      toolkitTouchable: {
+    toolkitTouchable: {
         backgroundColor: '#1ab4d2',
         height: '100%',
         justifyContent: 'center'
@@ -238,7 +330,36 @@ const styles = StyleSheet.create({
     formContainer: {
         borderWidth: 1,
         paddingTop: 20,
-        marginTop: -1
+        marginTop: -1,
+    },
+    formRow: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        margin: 10
+    },
+    formButtons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        margin: 10,
+
+    },
+    formLabel: {
+        fontSize: 16,
+        flex: 2,
+        fontWeight: '700'
+    },
+    textInput: {
+        width: '80%',
+        margin: 5,
+        marginTop: 0,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'gray',
+        padding: 5,
     }
     });
 

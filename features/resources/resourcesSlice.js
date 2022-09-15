@@ -10,6 +10,19 @@ export const fetchResources = createAsyncThunk(
     }
 );
 
+export const postResource = createAsyncThunk(
+    'resources/postResource',
+    async (payload, 
+          {dispatch, getState}
+          ) => {
+            setTimeout(() => {
+                const { resources } = getState();
+                payload.id = resources.resourcesArray.length;
+                dispatch(addResource(payload));
+            }, 2000);
+    }
+);
+
 const resourcesSlice = createSlice({
     name: 'resources',
     initialState: { isLoading: true, errMess: null, resourcesArray: [] },
