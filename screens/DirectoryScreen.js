@@ -1,6 +1,6 @@
 import { FlatList, Text, ScrollView, View, Modal, StyleSheet, 
         Alert, TouchableOpacity, Share, TextInput, 
-        ImageBackground } from 'react-native';
+        ImageBackground, Image } from 'react-native';
 import { ListItem, Avatar, Icon, Button } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -9,17 +9,21 @@ import * as Animatable from 'react-native-animatable';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import { postResource } from '../features/resources/resourcesSlice';
-import confetti from '../assets/img/confettiBg.png'
+import confetti from '../assets/img/confettiBg.png';
+import * as ImagePicker from 'expo-image-picker';
+import { baseUrl } from '../shared/baseUrl';
+import logo from '../assets/img/CYAlogo.png';
+
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
-
     const [showAddResourceModal, setShowAddResourceModal] = useState(false);
     const [name, setName] = useState('');
     const [author, setAuthor] = useState('');
     const [source, setSource] = useState('');
     const [url, setUrl] = useState('');
+    const [img, setImg] = useState(baseUrl + 'images/CYAlogo.png');
     const dispatch = useDispatch();
 
     const handleSubmit = () => {
@@ -30,8 +34,10 @@ const DirectoryScreen = ({ navigation }) => {
             name: name,
             author: author,
             source: source,
-            url: url
+            url: url,
+            img: img
         };
+        console.log(img);
         dispatch(postResource(newResource));
         setShowAddResourceModal(!showAddResourceModal);
         resetForm();
@@ -42,8 +48,24 @@ const DirectoryScreen = ({ navigation }) => {
         setAuthor('');
         setSource('');
         setUrl('');
+        setImg(baseUrl + 'images/CYAlogo.png');
     };
     
+    const getImageFromCamera = async () => {
+        const cameraPermission = 
+            await ImagePicker.requestCameraPermissionsAsync();
+        if (cameraPermission.status === 'granted') {
+            const capturedImage = await ImagePicker.launchCameraAsync({
+                allowsEdit: true,
+                aspect: [1, 1]
+            });
+            if (!capturedImage.cancelled) {
+                console.log(capturedImage);
+                setImg(capturedImage.uri);
+            }
+        }
+    };
+
 
     if (resources.isLoading) {
         return <Loading />;
@@ -265,6 +287,16 @@ const DirectoryScreen = ({ navigation }) => {
                                     value={url}
                                 />
                             </View>
+                            <View style={styles.formRow}>
+                                <View style={styles.imageContainer}>
+                                    <Image
+                                        source={{ uri: img }}
+                                        loadingIndicatorSource={logo}
+                                        style={styles.image}
+                                    />
+                                    <Button title='Select Image' onPress={getImageFromCamera} />
+                                </View>
+                            </View>
                             <View style={styles.formButtons}>
                                 <Button
                                     onPress={() => handleSubmit()}
@@ -272,7 +304,6 @@ const DirectoryScreen = ({ navigation }) => {
                                     accessibilityLabel='Tap me to add your resource to the directory.'
                                     buttonStyle={{margin: 2, backgroundColor: '#1ab4d2'}}
                                 />
-                            
                                 <Button
                                     onPress={() => {
                                         setShowAddResourceModal(!showAddResourceModal);
@@ -285,9 +316,9 @@ const DirectoryScreen = ({ navigation }) => {
                         </View>
                     </View>
                 </ScrollView>   
-            </ImageBackground>     
-    </Modal>
-    </>
+                </ImageBackground>     
+            </Modal>
+        </>
     );
 };
 
@@ -379,6 +410,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         borderColor: 'gray',
         padding: 5,
+    },
+    imageContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+        margin: 10
+    },
+    image: {
+        width: 60,
+        height: 60
     }
     });
 

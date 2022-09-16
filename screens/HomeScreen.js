@@ -68,7 +68,7 @@ const About = () => {
             style={styles.card}>
                 
                 <Card.Image
-                    source={poptubes}
+                    source={cake}
                     style={{resizeMode: 'contain'}}
                 >
                    <View style={{ justifyContent: 'center', flex: 1 }}>
@@ -96,7 +96,7 @@ const BrowseResources = () => {
             style={styles.card}>
                 
                 <Card.Image
-                    source={cake}
+                    source={poptubes}
                     style={{resizeMode: 'contain'}}
                 >
                 
