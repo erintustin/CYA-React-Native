@@ -1,7 +1,8 @@
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, ImageBackground } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import cake from '../assets/img/cake.png';
 import squishmallow from '../assets/img/squishmallow.png'
+import confetti from '../assets/img/confettiBg.png'
 import * as Animatable from 'react-native-animatable';
 import { useNavigation } from '@react-navigation/native';
 
@@ -90,6 +91,10 @@ const GetStarted = () => {
 
 const AboutScreen = () => {
         return (
+            <ImageBackground
+                source={confetti}
+                style={{width: '100%', height: '100%'}} 
+            >
             <ScrollView>
                 <Animatable.View
                     animation='fadeInDown'
@@ -104,6 +109,7 @@ const AboutScreen = () => {
                     </Card>
                 </Animatable.View>
             </ScrollView>
+            </ImageBackground>
         )
 };
 

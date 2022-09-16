@@ -1,5 +1,6 @@
 import { FlatList, Text, ScrollView, View, Modal, StyleSheet, 
-        Alert, TouchableOpacity, Share, TextInput } from 'react-native';
+        Alert, TouchableOpacity, Share, TextInput, 
+        ImageBackground } from 'react-native';
 import { ListItem, Avatar, Icon, Button } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
@@ -7,7 +8,8 @@ import Loading  from '../components/LoadingComponent';
 import * as Animatable from 'react-native-animatable';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
-import { postResource } from "../features/resources/resourcesSlice";
+import { postResource } from '../features/resources/resourcesSlice';
+import confetti from '../assets/img/confettiBg.png'
 
 const DirectoryScreen = ({ navigation }) => {
     const resources = useSelector((state) => state.resources);
@@ -200,8 +202,6 @@ const DirectoryScreen = ({ navigation }) => {
             keyExtractor={(item) => item.id.toString()}
 
         />
-
-
         <Modal
             animationType='slide'
             transparent={false}
@@ -209,78 +209,83 @@ const DirectoryScreen = ({ navigation }) => {
             style={{margin: 10}}
             onRequestClose={() => setShowAddResourceModal(!showAddResourceModal)}
         >
-        <ScrollView>
-            <View style={styles.modal}>
-                <Text style={styles.modalHeader}>Add New Resource</Text>
-                <View style={styles.formContainer}>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>
-                            Title:
-                        </Text>
-                        <TextInput
-                            width='95%'                                
-                            style={styles.textInput}
-                            placeholder='Resource Name'
-                            onChangeText={(name) => setName(name)}
-                            value={name}
-                        />
+            <ImageBackground
+                source={confetti}
+                style={{width: '100%', height: '100%'}} 
+        >
+                <ScrollView>
+                    <View style={styles.modal}>
+                        <Text style={styles.modalHeader}>Add New Resource</Text>
+                        <View style={styles.formContainer}>
+                            <View style={styles.formRow}>
+                                <Text style={styles.formLabel}>
+                                    Title:
+                                </Text>
+                                <TextInput
+                                    width='95%'                                
+                                    style={styles.textInput}
+                                    placeholder='Resource Name'
+                                    onChangeText={(name) => setName(name)}
+                                    value={name}
+                                />
+                            </View>
+                            <View style={styles.formRow}>
+                                <Text style={styles.formLabel}>
+                                    Author:
+                                </Text>
+                                <TextInput
+                                    width='95%'
+                                    style={styles.textInput}
+                                    placeholder='Resource Author'
+                                    onChangeText={(author) => setAuthor(author)}
+                                    value={author}
+                                />
+                            </View>
+                            <View style={styles.formRow}>
+                                <Text style={styles.formLabel}>
+                                    Source:
+                                </Text>
+                                <TextInput
+                                    width='95%'
+                                    style={styles.textInput}
+                                    placeholder='Source'
+                                    onChangeText={(source) => setSource(source)}
+                                    value={source}
+                                />
+                            </View>
+                            <View style={styles.formRow}>
+                                <Text style={styles.formLabel}>
+                                    URL:
+                                </Text>
+                                <TextInput
+                                    width='95%'
+                                    style={styles.textInput}
+                                    placeholder='Resource URL'
+                                    onChangeText={(url) => setUrl(url)}
+                                    value={url}
+                                />
+                            </View>
+                            <View style={styles.formButtons}>
+                                <Button
+                                    onPress={() => handleSubmit()}
+                                    title='ADD RESOURCE'
+                                    accessibilityLabel='Tap me to add your resource to the directory.'
+                                    buttonStyle={{margin: 2, backgroundColor: '#1ab4d2'}}
+                                />
+                            
+                                <Button
+                                    onPress={() => {
+                                        setShowAddResourceModal(!showAddResourceModal);
+                                        resetForm();
+                                    }}
+                                    title='CANCEL'
+                                    buttonStyle={{margin: 2, backgroundColor: 'gray'}}
+                                />
+                            </View>
+                        </View>
                     </View>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>
-                            Author:
-                        </Text>
-                        <TextInput
-                            width='95%'
-                            style={styles.textInput}
-                            placeholder='Resource Author'
-                            onChangeText={(author) => setAuthor(author)}
-                            value={author}
-                        />
-                    </View>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>
-                            Source:
-                        </Text>
-                        <TextInput
-                            width='95%'
-                            style={styles.textInput}
-                            placeholder='Source'
-                            onChangeText={(source) => setSource(source)}
-                            value={source}
-                        />
-                    </View>
-                    <View style={styles.formRow}>
-                        <Text style={styles.formLabel}>
-                            URL:
-                        </Text>
-                        <TextInput
-                            width='95%'
-                            style={styles.textInput}
-                            placeholder='Resource URL'
-                            onChangeText={(url) => setUrl(url)}
-                            value={url}
-                        />
-                    </View>
-                    <View style={styles.formButtons}>
-                        <Button
-                            onPress={() => handleSubmit()}
-                            title='ADD RESOURCE'
-                            accessibilityLabel='Tap me to add your resource to the directory.'
-                            buttonStyle={{margin: 2, backgroundColor: '#1ab4d2'}}
-                        />
-                    
-                        <Button
-                            onPress={() => {
-                                setShowAddResourceModal(!showAddResourceModal);
-                                resetForm();
-                            }}
-                            title='CANCEL'
-                            buttonStyle={{margin: 2, backgroundColor: 'gray'}}
-                        />
-                    </View>
-                </View>
-            </View>
-        </ScrollView>        
+                </ScrollView>   
+            </ImageBackground>     
     </Modal>
     </>
     );
@@ -344,6 +349,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingTop: 20,
         marginTop: -1,
+        backgroundColor: '#fff'
     },
     formRow: {
         alignItems: 'center',

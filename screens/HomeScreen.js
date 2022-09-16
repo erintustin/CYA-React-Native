@@ -198,14 +198,18 @@ const Feedback = () => {
                 
                 </Card.Image>
         </Card>
-                <Modal
+            <Modal
                 animationType='slide'
                 transparent={false}
                 visible={showFeedbackModal}
                 style={{margin: 10}}
                 onRequestClose={() => setShowFeedbackModal(!showFeedbackModal)}
             >
-            <ScrollView>
+            <ImageBackground
+                source={confetti}
+                style={{width: '100%', height: '100%'}} 
+            >
+                <ScrollView>
                 <View style={styles.modal}>
                     <Text style={styles.modalHeader}>Provide Feedback</Text>
                     <View style={styles.formContainer}>
@@ -268,7 +272,8 @@ const Feedback = () => {
                         </View>
                     </View>
                 </View>
-            </ScrollView>        
+                </ScrollView> 
+            </ImageBackground>       
         </Modal>
         </>
     )
@@ -363,6 +368,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         paddingTop: 20,
         marginTop: -1,
+        backgroundColor: '#fff'
     },
     formRow: {
         alignItems: 'center',
