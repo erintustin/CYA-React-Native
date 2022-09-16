@@ -1,15 +1,19 @@
-import { Text, View, Animated, ImageBackground, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import { ListItem, Avatar, Card } from 'react-native-elements';
+import { Text, View, Animated, ImageBackground, Image, 
+        StyleSheet, TouchableOpacity, Modal, ScrollView, 
+        TextInput } from 'react-native';
+import { ListItem, Avatar, Card, Button } from 'react-native-elements';
 import confetti from '../assets/img/confettiBg.png';
 import logo from '../assets/img/CYAlogo.png';
 import cake from '../assets/img/cake.png';
 import squishmallow from '../assets/img/squishmallow.png';
+import poptubes from '../assets/img/poptubes.png';
 import feedback from '../assets/img/feedbacklogo.png'
 import headericon1 from '../assets/img/headerIcon1.png';
 import headericon2 from '../assets/img/headerIcon2.png';
 import headericon3 from '../assets/img/headerIcon3.png';
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 
 const CoreValues = () => {
     return(
@@ -55,6 +59,35 @@ const CoreValues = () => {
         </>
     );
 }
+
+const About = () => {
+    const navigation = useNavigation();
+    return(
+        <Card
+            containerStyle={{ padding: 0 }}
+            style={styles.card}>
+                
+                <Card.Image
+                    source={poptubes}
+                    style={{resizeMode: 'contain'}}
+                >
+                   <View style={{ justifyContent: 'center', flex: 1 }}>
+                        <TouchableOpacity 
+                        
+                        onPress={() =>
+                                navigation.navigate('About')
+                                }> 
+                        <Text
+                            style={styles.cardTitle}>
+                            ABOUT
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
+                </Card.Image>
+        </Card>
+    )
+};
+
 const BrowseResources = () => {
     const navigation = useNavigation();
     return(
@@ -117,7 +150,31 @@ const MyToolkit = () => {
 };
 
 const Feedback = () => {
+    const [showFeedbackModal, setShowFeedbackModal] = useState(false);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [comments, setComments] = useState('');
+    const dispatch = useDispatch();
+
+    const handleSubmit = () => {
+        const feedback = {
+            name: name,
+            email: email,
+            feedback: comments
+        };
+        dispatch(postFeedback(feedback));
+        setShowFeedbackModal(!showFeedbackModal);
+        resetForm();
+    };
+    
+    const resetForm = () => {
+        setName('');
+        setEmail('');
+        setComments('');
+    };
+
     return(
+        <>
         <Card
             containerStyle={{ padding: 0 }}
             style={styles.card}>
@@ -127,14 +184,93 @@ const Feedback = () => {
                     style={{resizeMode: 'contain'}}
                 >
                    <View style={{ justifyContent: 'center', flex: 1 }}>
-                <Text
-                    style={styles.cardTitle}>
-                    PROVIDE FEEDBACK
-                </Text>
-                </View>
+                        <TouchableOpacity 
+                        
+                        onPress={() =>
+                                setShowFeedbackModal(!showFeedbackModal)
+                                }> 
+                        <Text
+                            style={styles.cardTitle}>
+                            PROVIDE FEEDBACK
+                        </Text>
+                        </TouchableOpacity>
+                    </View>
                 
                 </Card.Image>
         </Card>
+                <Modal
+                animationType='slide'
+                transparent={false}
+                visible={showFeedbackModal}
+                style={{margin: 10}}
+                onRequestClose={() => setShowFeedbackModal(!showFeedbackModal)}
+            >
+            <ScrollView>
+                <View style={styles.modal}>
+                    <Text style={styles.modalHeader}>Provide Feedback</Text>
+                    <View style={styles.formContainer}>
+                        <View style={styles.formRow}>
+                            <Text style={styles.formLabel}>
+                                Name:
+                            </Text>
+                            <TextInput
+                                width='95%'                                
+                                style={styles.textInput}
+                                placeholder='Name'
+                                onChangeText={(name) => setName(name)}
+                                value={name}
+                            />
+                        </View>
+                        <View style={styles.formRow}>
+                            <Text style={styles.formLabel}>
+                                E-mail:
+                            </Text>
+                            <TextInput
+                                width='95%'
+                                style={styles.textInput}
+                                placeholder='email@email.com'
+                                onChangeText={(email) => setAuthor(email)}
+                                value={email}
+                            />
+                        </View>
+                        <View style={styles.formRow}>
+                            <Text style={styles.formLabel}>
+                                Comments:
+                            </Text>
+                        </View>
+                        <View style={styles.comments}>
+                            <TextInput
+                                multiline
+                                numberOfLines={15}
+                                width='95%'
+                                style={styles.textInput}
+                                placeholder='Thank you for supporting this project with your feedback!'
+                                onChangeText={(comments) => setUrl(comments)}
+                                value={comments}
+                            />
+                        </View>
+                        <View style={styles.formButtons}>
+                            <Button
+                                onPress={() => handleSubmit()}
+                                title='SUBMIT'
+                                accessibilityLabel='Tap me to submit your feedback.'
+                                buttonStyle={{margin: 2, backgroundColor: '#1ab4d2'}}
+                            />
+                        
+                            <Button
+                                onPress={() => {
+                                    setShowFeedbackModal(!showFeedbackModal);
+                                    resetForm();
+                                }}
+                                title='CANCEL'
+                                buttonStyle={{margin: 2, backgroundColor: 'gray'}}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </ScrollView>        
+        </Modal>
+        </>
     )
 };
 
@@ -166,6 +302,7 @@ const HomeScreen = ({ navigation }) => {
             <Text style={styles.subtitle}>Build Your Own Neurodiversity-Affirming Toolkit </Text>
             
         <CoreValues />
+        <About />
         <BrowseResources />
         <MyToolkit />
         <Feedback />
@@ -175,7 +312,6 @@ const HomeScreen = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
- 
     logo: {
         width: 300,
         height: 300,
@@ -200,16 +336,67 @@ const styles = StyleSheet.create({
         padding: 10
         
     },
-    card: {
-    
-
-    },
     cardTitle: {
         color: 'black', 
         textAlign: 'center', 
         fontSize: 25, 
         fontFamily: 'Catamaran_400Regular',
         backgroundColor: 'rgba(255, 255, 255, .8)'
+    },
+    modal: {
+        justifyContent: 'center',
+        margin: 20
+    },
+    modalHeader: {
+        backgroundColor: '#1ab4d2', 
+        borderWidth: 1,
+        fontSize: 30,
+        padding: 5,
+        textAlign: 'center',
+        fontFamily: 'GochiHand_400Regular',
+        marginTop: 20,
+        marginLeft: 0,
+        marginRight: 0,
+        marginBottom: 0
+      },
+    formContainer: {
+        borderWidth: 1,
+        paddingTop: 20,
+        marginTop: -1,
+    },
+    formRow: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flex: 1,
+        flexDirection: 'row',
+        margin: 10
+    },
+    formButtons: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        margin: 10,
+
+    },
+    formLabel: {
+        fontSize: 16,
+        flex: 2,
+        fontWeight: '700'
+    },
+    textInput: {
+        width: '80%',
+        margin: 5,
+        marginTop: 0,
+        backgroundColor: '#fff',
+        borderWidth: 1,
+        borderRadius: 10,
+        borderColor: 'gray',
+        padding: 5,
+    },
+    comments: {
+        width: '100%',
+        flexDirection:'row',
+        justifyContent:'center'
     }
    
 })

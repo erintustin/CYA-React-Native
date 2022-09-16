@@ -7,11 +7,12 @@ import { createDrawerNavigator,
         DrawerContentScrollView, 
         DrawerItemList } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
+import AboutScreen from './AboutScreen';
 import DirectoryScreen from './DirectoryScreen';
 import ResourceInfoScreen from './ResourceInfoScreen';
 import myToolkitScreen from './MyToolkitScreen';
 import LoginScreen from './LoginScreen';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { fetchResources } from '../features/resources/resourcesSlice';
 import { fetchNotes } from '../features/notes/notesSlice';
@@ -39,6 +40,29 @@ const HomeNavigator = () => {
                         headerLeft: () => (
                             <Icon
                                 name='home'
+                                type='font-awesome'
+                                iconStyle={styles.stackIcon}
+                                onPress= {() => navigation.toggleDrawer()}
+                            />
+                        )
+                    })}
+                    />
+        </Stack.Navigator>
+    );
+};
+
+const AboutNavigator = () => {
+    const Stack = createStackNavigator();
+    return(
+        <Stack.Navigator
+            screenOptions={screenOptions}>
+                <Stack.Screen 
+                    name='About'
+                    component={AboutScreen}
+                    options={({ navigation }) => ({
+                        headerLeft: () => (
+                            <Icon
+                                name='info'
                                 type='font-awesome'
                                 iconStyle={styles.stackIcon}
                                 onPress= {() => navigation.toggleDrawer()}
@@ -173,13 +197,14 @@ const Main = () => {
                 drawerStyle={{ backgroundColor: 'rgb(243, 239, 239)'}}
                 drawerContent={CustomDrawerContent}
             >
-                <Drawer.Screen
-                    name='Login'
-                    component={LoginNavigator}
-                    options={{
+                <Drawer.Screen 
+                    name='Home'
+                    component={HomeNavigator}
+                    options={{ 
+                        title: 'Home',
                         drawerIcon: ({ color }) => (
                             <Icon
-                                name='sign-in'
+                                name='home'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}
@@ -189,13 +214,12 @@ const Main = () => {
                     }}
                 />
                 <Drawer.Screen 
-                    name='Home'
-                    component={HomeNavigator}
+                    name='About'
+                    component={AboutNavigator}
                     options={{ 
-                        title: 'Home',
                         drawerIcon: ({ color }) => (
                             <Icon
-                                name='home'
+                                name='info'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}
@@ -228,6 +252,21 @@ const Main = () => {
                         drawerIcon: ({ color }) => (
                             <Icon
                                 name='briefcase'
+                                type='font-awesome'
+                                size={24}
+                                iconStyle={{ width: 24 }}
+                                color={color}
+                            />
+                        )
+                    }}
+                />
+                <Drawer.Screen
+                    name='Login'
+                    component={LoginNavigator}
+                    options={{
+                        drawerIcon: ({ color }) => (
+                            <Icon
+                                name='sign-in'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}
