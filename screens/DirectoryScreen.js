@@ -51,11 +51,11 @@ const DirectoryScreen = ({ navigation }) => {
         setImg(baseUrl + 'images/CYAlogo.png');
     };
     
-    const getImageFromCamera = async () => {
-        const cameraPermission = 
-            await ImagePicker.requestCameraPermissionsAsync();
-        if (cameraPermission.status === 'granted') {
-            const capturedImage = await ImagePicker.launchCameraAsync({
+    const getImageFromGallery = async () => {
+        const mediaLibraryPermissions = 
+            await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (mediaLibraryPermissions.status === 'granted') {
+            const capturedImage = await ImagePicker.launchImageLibraryAsync({
                 allowsEdit: true,
                 aspect: [1, 1]
             });
@@ -65,7 +65,6 @@ const DirectoryScreen = ({ navigation }) => {
             }
         }
     };
-
 
     if (resources.isLoading) {
         return <Loading />;
@@ -294,7 +293,7 @@ const DirectoryScreen = ({ navigation }) => {
                                         loadingIndicatorSource={logo}
                                         style={styles.image}
                                     />
-                                    <Button title='Select Image' onPress={getImageFromCamera} />
+                                    <Button title='Select Image' onPress={getImageFromGallery} />
                                 </View>
                             </View>
                             <View style={styles.formButtons}>
