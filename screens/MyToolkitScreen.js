@@ -108,6 +108,11 @@ const myToolkitScreen = ({ navigation }) => {
             containerStyle={{backgroundColor: 'lightgray', justifyContent: 'center'}}
             onPress={() => navigation.navigate('Directory')}>
             <Icon
+                name='briefcase'
+                type='font-awesome'
+                color='gray'
+                />
+            <Icon
                 name='share'
                 type='font-awesome'
                 color='gray'

@@ -96,7 +96,7 @@ const MyToolkitNavigator = () => {
                     title: 'My Toolkit',
                     headerLeft: () => (
                         <Icon
-                            name='user'
+                            name='briefcase'
                             type='font-awesome'
                             iconStyle={styles.stackIcon}
                             onPress={() => navigation.toggleDrawer()}
@@ -227,7 +227,7 @@ const Main = () => {
                         title: 'My Toolkit',
                         drawerIcon: ({ color }) => (
                             <Icon
-                                name='user'
+                                name='briefcase'
                                 type='font-awesome'
                                 size={24}
                                 iconStyle={{ width: 24 }}

@@ -1,6 +1,6 @@
 import { FlatList, Text, ScrollView, View, Modal, StyleSheet, 
-        Alert, TouchableOpacity, Share, Button, TextInput } from 'react-native';
-import { ListItem, Avatar, Icon } from 'react-native-elements';
+        Alert, TouchableOpacity, Share, TextInput } from 'react-native';
+import { ListItem, Avatar, Icon, Button } from 'react-native-elements';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
 import Loading  from '../components/LoadingComponent';
@@ -132,7 +132,11 @@ const DirectoryScreen = ({ navigation }) => {
                         <Text style={styles.addToToolkitText}>ADD TO TOOLKIT</Text>
                         <Icon
                         type='font-awesome'
-                        name='user-plus'
+                        name='plus'
+                        color='#fff' />
+                        <Icon
+                        type='font-awesome'
+                        name='briefcase'
                         color='#fff' />
                     </TouchableOpacity>
                     <TouchableOpacity 
@@ -147,6 +151,10 @@ const DirectoryScreen = ({ navigation }) => {
                         <Icon
                         type='font-awesome'
                         name='share'
+                        color='#fff' />
+                        <Icon
+                        type='font-awesome'
+                        name='file'
                         color='#fff' />
                     </TouchableOpacity>
                 </View>
@@ -176,6 +184,11 @@ const DirectoryScreen = ({ navigation }) => {
             onPress={() => setShowAddResourceModal(!showAddResourceModal)}>
             <Icon
                 name='plus'
+                type='font-awesome'
+                color='gray'
+            />
+            <Icon
+                name='file'
                 type='font-awesome'
                 color='gray'
             />
@@ -251,9 +264,9 @@ const DirectoryScreen = ({ navigation }) => {
                     <View style={styles.formButtons}>
                         <Button
                             onPress={() => handleSubmit()}
-                            title='Add Resource'
-                            color='#1ab4d2'
+                            title='ADD RESOURCE'
                             accessibilityLabel='Tap me to add your resource to the directory.'
+                            buttonStyle={{margin: 2, backgroundColor: '#1ab4d2'}}
                         />
                     
                         <Button
@@ -261,8 +274,8 @@ const DirectoryScreen = ({ navigation }) => {
                                 setShowAddResourceModal(!showAddResourceModal);
                                 resetForm();
                             }}
-                            color='gray'
-                            title='Cancel'
+                            title='CANCEL'
+                            buttonStyle={{margin: 2, backgroundColor: 'gray'}}
                         />
                     </View>
                 </View>
