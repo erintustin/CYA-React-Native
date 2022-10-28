@@ -59,7 +59,7 @@ const RenderResource = (props) => {
                         <Button 
                             style={styles.buttons}
                             title={props.inToolkit ? 'Remove from Toolkit' : 'Add to Toolkit'}
-                            color='#1ab4d2'
+                            color={props.inToolkit ? 'gray' : '#1ab4d2'}
                             onPress={() => 
                                 dispatch(
                                     toggleAddToToolkit(resource.id))}

@@ -67,7 +67,7 @@ const ResourceInfoScreen = ({ route }) => {
                                     style={styles.noteButtons}
                                     onPress={() =>
                                         Alert.alert(
-                                            'Delete from Toolkit?',
+                                            'Delete this Note?',
                                             'Are you sure you wish to delete this note?',
                                             [
                                                 {

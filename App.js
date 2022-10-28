@@ -5,6 +5,8 @@ import Main from './screens/MainComponent.js';
 import AppLoading from 'expo-app-loading';
 import { useFonts, GochiHand_400Regular, Catamaran_400Regular } from '@expo-google-fonts/dev';
 
+console.disableYellowBox = true;
+
 
 
 

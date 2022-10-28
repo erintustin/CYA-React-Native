@@ -1,6 +1,6 @@
 import { Text, View, Animated, ImageBackground, Image, 
         StyleSheet, TouchableOpacity, Modal, ScrollView, 
-        TextInput } from 'react-native';
+        TextInput, Alert } from 'react-native';
 import { ListItem, Avatar, Card, Button } from 'react-native-elements';
 import confetti from '../assets/img/confettiBg.png';
 import logo from '../assets/img/CYAlogo.png';
@@ -14,6 +14,7 @@ import headericon3 from '../assets/img/headerIcon3.png';
 import { useState, useEffect, useRef } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch } from 'react-redux';
+import { postFeedback} from '../features/feedback/feedbackSlice';
 
 const CoreValues = () => {
     return(
@@ -165,6 +166,17 @@ const Feedback = () => {
         dispatch(postFeedback(feedback));
         setShowFeedbackModal(!showFeedbackModal);
         resetForm();
+        return Alert.alert(
+            'Feedback Submitted',
+            'Thank you for your Feedback!',
+            [
+                {
+                    text: 'Close',
+                    style: 'cancel'
+                }
+            ],
+            {cancelable: false}
+        )
     };
     
     const resetForm = () => {
@@ -233,7 +245,7 @@ const Feedback = () => {
                                 width='95%'
                                 style={styles.textInput}
                                 placeholder='email@email.com'
-                                onChangeText={(email) => setAuthor(email)}
+                                onChangeText={(email) => setEmail(email)}
                                 value={email}
                             />
                         </View>
@@ -249,7 +261,7 @@ const Feedback = () => {
                                 width='95%'
                                 style={styles.textInput}
                                 placeholder='Thank you for supporting this project with your feedback!'
-                                onChangeText={(comments) => setUrl(comments)}
+                                onChangeText={(comments) => setComments(comments)}
                                 value={comments}
                             />
                         </View>

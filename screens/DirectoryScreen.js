@@ -221,7 +221,6 @@ const DirectoryScreen = ({ navigation }) => {
             data={resources.resourcesArray}
             renderItem={renderDirectoryItem}
             keyExtractor={(item) => item.id.toString()}
-
         />
         <Modal
             animationType='slide'
@@ -293,7 +292,10 @@ const DirectoryScreen = ({ navigation }) => {
                                         loadingIndicatorSource={logo}
                                         style={styles.image}
                                     />
-                                    <Button title='Select Image' onPress={getImageFromGallery} />
+                                    <Button 
+                                        title='Select Image' 
+                                        buttonStyle={{backgroundColor: 'lightgray'}}
+                                        onPress={getImageFromGallery} />
                                 </View>
                             </View>
                             <View style={styles.formButtons}>

@@ -16,7 +16,7 @@ function Welcome() {
             <Card.Title 
                 style={{fontSize: 40, 
                 marginTop: 80, 
-                fontWeight: 'regular', 
+                fontWeight: 'normal', 
                 fontFamily: 'GochiHand_400Regular'}}
                 >Congratulations!</Card.Title>
             </Card.Image>
@@ -52,7 +52,7 @@ function HowTo() {
             <Card.Title 
                 style={{fontSize: 35, 
                 marginTop: 85, 
-                fontWeight: 'regular', 
+                fontWeight: 'normal', 
                 fontFamily: 'GochiHand_400Regular'}}>
                 Using Your Toolkit</Card.Title>
             </Card.Image>
