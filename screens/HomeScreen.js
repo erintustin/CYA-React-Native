@@ -27,7 +27,7 @@ const CoreValues = () => {
                 <ListItem.Content>
                     <ListItem.Title>Ending Myths and Stereotypes</ListItem.Title>
                         <ListItem.Subtitle>
-                            Autism has been misrepresented by the medical community,
+                            Autism is often misrepresented by the medical community,
                             in the media, and by charitable organizations.
                         </ListItem.Subtitle>
                     </ListItem.Content>

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SwipeRow } from 'react-native-swipe-list-view';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import Loading from '../components/LoadingComponent';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
 
 const myToolkitScreen = ({ navigation }) => {
     const { resourcesArray, isLoading, errMess } = useSelector(
@@ -12,6 +12,20 @@ const myToolkitScreen = ({ navigation }) => {
         );
     const myToolkitResources = useSelector((state) => state.myToolkitResources);
     const dispatch = useDispatch();
+
+    const shareToolkit = () => {
+        Alert.alert(
+            'Coming Soon!',
+            'This feature is not yet available.',
+            [
+                {
+                    text: 'Close',
+                    style: 'cancel'
+                }
+            ],
+            {cancelable: false}
+        )
+    };
     
 
     const renderMyToolkitResource = ({ item: resource }) => {
@@ -106,7 +120,7 @@ const myToolkitScreen = ({ navigation }) => {
         </Animatable.View>
         <ListItem
             containerStyle={{backgroundColor: 'lightgray', justifyContent: 'center'}}
-            onPress={() => navigation.navigate('Directory')}>
+            onPress={() => shareToolkit()}>
             <Icon
                 name='briefcase'
                 type='font-awesome'
