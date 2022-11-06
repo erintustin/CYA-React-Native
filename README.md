@@ -1,11 +1,17 @@
 # Congrats, You're Autistic! Build Your Own Neurodiversity-Affirming Toolkit
 
-A mobile app companion to the 'Congrats, You're Autistic' web app that allows users to create a personalized toolkit using preloaded resources as well as adding their own favorites from the web. The repository for the web app can be found here: https://github.com/erintustin/CYA A live demo of the web app is here: https://congratsyoureautistic.web.app/
+A mobile app companion to the 'Congrats, You're Autistic' web app that allows users to create a personalized toolkit using preloaded resources as well as adding their own favorites from the web.
 
-## Concept
+
+## Concept and History
 The original 'Congrats, You're Autistic' project was conceived with the goal of offering an alternative to the PDF toolkit currently offered by most medical providers following an autism diagnosis. 
 With an understanding that Autistic adults are the foremost experts on what it means to have Autism, this project seeks to compile the best autistic-authored resources on the web and offer them 
-in an easy-to-share format. The mobile app will allow users to keep the resources most relveant to them 'in their pocket' and allow them to add additional
+in an easy-to-share format. <br />
+
+The repository for the web app can be found here: https://github.com/erintustin/CYA <br />
+<br />A live demo of the web app is here: https://congratsyoureautistic.web.app/ <br />
+
+The mobile app will allow users to keep the resources most relveant to them 'in their pocket' and allow them to add additional
 resources from the web for a personalized experience. 
 
 This project promotes viewing Autism through the lens of Neurodiversity and the social model of disability, which sees disability as a natural part of human diversity to be celebrated, supported, 
@@ -17,11 +23,11 @@ Video Demo: https://loom.com/share/45e38eac0346450889aa984485132465
 This project was developed with JavaScript/JSX using React Native and relies heavily on react-native-swipe-list-view to display the directory of resources as
 well as each toolkit. Each resource in the toolkit is contained on an InfoScreen that houses the available features. These features are:
 
-View Resource - opens the resource at its original source in the device's browser
-Add to Toolkit/Remove from Toolkit - adds or removes the resource to/from a toolkit
-Add Note - allows users to add a note
-Share - allows users to share resource via device's native share options
-Share with Note - allows users to share resource with the text of a note added in addition to the link
+View Resource - opens the resource at its original source in the device's browser <br />
+Add to Toolkit/Remove from Toolkit - adds or removes the resource to/from a toolkit <br />
+Add Note - allows users to add a note <br />
+Share - allows users to share resource via device's native share options <br />
+Share with Note - allows users to share resource with the text of a note added in addition to the link <br />
 
 In addition, users are able to Add a Resource to the resource directory which will function the same as the preloaded resources from its own InfoScreen. 
 
@@ -29,7 +35,7 @@ Both Stack Navigation and Drawer Navigation are utilized. SwipeRow with Touchabl
 SwipeRow is also used with a Touchable Opacity on the Toolkit Screen to quickly delete resources. 
 
 ## Back-End/Server-Side
-Currently the project is utilizing a REST API hosted on a local JSON Server. I'm currently working on integrating with the same Express Server utilizing NodeJS and MongoDB that will serve the 'Congrats, You're Autistic' web app. 
+Currently the project is utilizing a REST API hosted on a local JSON Server. I'm currently working on integrating with the same Express Server utilizing NodeJS and MongoDB that will serve the 'Congrats, You're Autistic' web app. <br /><br />
 The server respository can be found here: https://github.com/erintustin/CYAServer
 
 ## Future Goals
