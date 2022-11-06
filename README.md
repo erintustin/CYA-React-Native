@@ -1,7 +1,8 @@
 # Congrats, You're Autistic! Build Your Own Neurodiversity-Affirming Toolkit
 
-A mobile app companion to the 'Congrats, You're Autistic' web app that allows users to create a personalized toolkit using preloaded resources as well as adding their own favorites from the web. 
+A mobile app companion to the 'Congrats, You're Autistic' web app that allows users to create a personalized toolkit using preloaded resources as well as adding their own favorites from the web. The repository for the web app can be found here:https://github.com/erintustin/CYA A live demo of the web app is here: https://congratsyoureautistic.web.app/
 
+## Concept
 The original Congrats, You're Autistic project was conceived with the goal of offering an alternative to the PDF toolkit currently offered by most medical providers following an autism diagnosis. 
 With an understanding that Autistic adults are the foremost experts on what it means to have Autism, this project seeks to compile the best autistic-authored resources on the web and offer them 
 in an easy-to-share format. The mobile app will allow users to keep the resources most relveant to them 'in their pocket' and allow them to add additional
