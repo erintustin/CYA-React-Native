@@ -7,10 +7,6 @@ import { useFonts, GochiHand_400Regular, Catamaran_400Regular } from '@expo-goog
 
 console.disableYellowBox = true;
 
-
-
-
-
 export default function App() {
   let [fontsLoaded] = useFonts({
     GochiHand_400Regular,

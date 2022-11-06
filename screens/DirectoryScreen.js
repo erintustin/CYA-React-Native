@@ -146,56 +146,61 @@ const DirectoryScreen = ({ navigation }) => {
         }
         return(
             <Animatable.View animation='fadeInRightBig' duration={2000}>
-                <SwipeRow rightOpenValue={-200}>
-                <View style={styles.addToToolkitView}>
-                    <TouchableOpacity 
-                        style={styles.toolkitTouchable}
-                        onPress={() => addToToolkit()}
-                    >
-                        <Text style={styles.addToToolkitText}>ADD TO TOOLKIT</Text>
-                        <Icon
-                        type='font-awesome'
-                        name='plus'
-                        color='#fff' />
-                        <Icon
-                        type='font-awesome'
-                        name='briefcase'
-                        color='#fff' />
-                    </TouchableOpacity>
-                    <TouchableOpacity 
-                        style={styles.shareTouchable}
-                        onPress={() => 
-                            ShareResource(
-                                resource.name,
-                                resource.url
-                            )}
-                    >
-                        <Text style={styles.shareText}>SHARE RESOURCE</Text>
-                        <Icon
-                        type='font-awesome'
-                        name='share'
-                        color='#fff' />
-                        <Icon
-                        type='font-awesome'
-                        name='file'
-                        color='#fff' />
-                    </TouchableOpacity>
-                </View>
-                <ListItem
-                    onPress={() =>
-                    navigation.navigate('ResourceInfo', { resource })
-                }>
-                    
-                    <Avatar 
-                        source={{uri: resource.img}}
-                        rounded
-                    />
-                    <ListItem.Content>
-                        <ListItem.Title>{resource.name}</ListItem.Title>
-                        <ListItem.Subtitle>By: {resource.author}</ListItem.Subtitle>
-                        <ListItem.Subtitle>Source: {resource.source}</ListItem.Subtitle>
-                    </ListItem.Content>
-                </ListItem>
+                <SwipeRow rightOpenValue={-200}
+                            closeOnRowPress={true}
+                            swipeToClosePercent={20}
+                            >
+                    <View style={styles.addToToolkitView}>
+                        <TouchableOpacity 
+                            style={styles.toolkitTouchable}
+                            onPress={() => addToToolkit()}
+                        >
+                            <Text style={styles.addToToolkitText}>ADD TO TOOLKIT</Text>
+                            <Icon
+                            type='font-awesome'
+                            name='plus'
+                            color='#fff' />
+                            <Icon
+                            type='font-awesome'
+                            name='briefcase'
+                            color='#fff' />
+                        </TouchableOpacity>
+                        <TouchableOpacity 
+                            style={styles.shareTouchable}
+                            onPress={() => 
+                                ShareResource(
+                                    resource.name,
+                                    resource.url
+                                )}
+                        >
+                            <Text style={styles.shareText}>SHARE RESOURCE</Text>
+                            <Icon
+                            type='font-awesome'
+                            name='share'
+                            color='#fff' />
+                            <Icon
+                            type='font-awesome'
+                            name='file'
+                            color='#fff' />
+                        </TouchableOpacity>
+                    </View>
+                    <View>
+                        <ListItem
+                            onPress={() =>
+                            navigation.navigate('ResourceInfo', { resource })
+                        }>
+                            
+                            <Avatar 
+                                source={{uri: resource.img}}
+                                rounded
+                            />
+                            <ListItem.Content>
+                                <ListItem.Title>{resource.name}</ListItem.Title>
+                                <ListItem.Subtitle>By: {resource.author}</ListItem.Subtitle>
+                                <ListItem.Subtitle>Source: {resource.source}</ListItem.Subtitle>
+                            </ListItem.Content>
+                        </ListItem>
+                    </View>
                 </SwipeRow>
             </Animatable.View>
         );

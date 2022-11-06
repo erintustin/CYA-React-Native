@@ -5,9 +5,7 @@ import { TextInput } from 'react-native';
 import { postNote, deleteNote} from '../features/notes/notesSlice';
 import { toggleAddToToolkit } from '../features/myToolkit/myToolkitSlice';
 import { useState } from 'react';
-
 import * as Animatable from 'react-native-animatable';
-
 
 const ResourceInfoScreen = ({ route }) => {
     const { resource } = route.params;
